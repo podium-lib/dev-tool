@@ -1,0 +1,24 @@
+{
+    "name": "@podium/podlet-development-middleware",
+    "version": "0.1.0",
+    "description": "Middleware that exposes a development API on Podium podlets for development tools to make use of",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Richard Walker <richard.walker@schibsted.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@podium/podlet": "^2.1.1",
+        "@podium/proxy": "^2.2.0",
+        "express": "^4.16.3",
+        "jest": "^23.4.2",
+        "supertest": "^3.1.0"
+    },
+    "dependencies": {
+        "@podium/context": "^2.2.1",
+        "@podium/utils": "^2.0.0",
+        "abslog": "^2.1.1",
+        "body": "^5.1.0"
+    }
+}
