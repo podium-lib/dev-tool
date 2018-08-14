@@ -2,25 +2,22 @@
 
 const express = require('express');
 const Podlet = require('@podium/podlet');
-const DevToolApi = require('../lib/index');
+const DevelopmentMiddleware = require('../lib/index');
 
 const app = express();
 const podlet = new Podlet({
     name: 'myPodlet',
     version: '1.0.0',
     defaults: true,
-    // logger: console,
 });
 
-const logger = {
-    ...console,
-    fatal: console.log,
-    trace() {},
-};
-const devToolApi = new DevToolApi({ enabled: true, logger });
+const developmentMiddleware = new DevelopmentMiddleware({
+    enabled: true,
+    logger: console,
+});
 
 app.use(podlet.middleware());
-app.use(devToolApi.middleware());
+app.use(developmentMiddleware.middleware());
 
 app.get(podlet.manifest(), (req, res) => {
     res.json(podlet);
