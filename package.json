@@ -1,7 +1,8 @@
 {
     "name": "@podium/podlet-development-middleware",
     "version": "0.1.0",
-    "description": "Middleware that exposes a development API on Podium podlets for development tools to make use of",
+    "description":
+        "Middleware that exposes a development API on Podium podlets for development tools to make use of",
     "main": "lib/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +20,10 @@
         "@podium/context": "^2.2.1",
         "@podium/utils": "^2.0.0",
         "abslog": "^2.1.1",
-        "body": "^5.1.0"
+        "body": "^5.1.0",
+        "eslint": "^4.19.1",
+        "eslint-config-finn": "^3.0.0",
+        "eslint-config-finn-prettier": "^3.0.1",
+        "prettier": "1.12.1"
     }
 }
