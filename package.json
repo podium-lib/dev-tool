@@ -1,9 +1,9 @@
 {
-    "name": "@podium/podlet-development-middleware",
+    "name": "@podium/devtool",
     "version": "0.1.0",
     "description":
-        "Middleware that exposes a development API on Podium podlets for development tools to make use of",
-    "main": "lib/index.js",
+        "Development tool to improve the experience of working on Podium podlets",
+    "main": "server/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

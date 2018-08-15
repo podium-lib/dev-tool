@@ -1,18 +1,15 @@
 {
-    "root": true,
-    "extends": ["finn", "finn/node", "finn-prettier"],
-    "parserOptions": {
-        "ecmaVersion": 2017,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
-    },
-    "overrides": [
-        {
-            "files": "__tests__/**/*",
-            "env": {
-                "jest": true
-            }
-        }
-    ]
+  "root": true,
+  "extends": ["finn", "finn/node", "finn-prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "overrides": [
+    {
+      "files": "test/**/*",
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
