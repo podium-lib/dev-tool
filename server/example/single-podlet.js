@@ -1,6 +1,6 @@
 'use strict';
 
-const DevTool = require('../server');
+const DevTool = require('../lib');
 const Podlet = require('@podium/podlet');
 const app = require('express')();
 
@@ -31,7 +31,7 @@ app.get(podlet.content(), (req, res) => {
 });
 
 app.listen(7100);
-devTool.listen(7101);
+devTool.listen(8172);
 
 // GET http://localhost:7101/
 // GET http://localhost:7101/podlet
