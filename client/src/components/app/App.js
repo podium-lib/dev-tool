@@ -5,6 +5,7 @@ import Container from './container/Container';
 import { version } from '../../../package.json';
 import Api from '../../services/api';
 import Page from '../../services/page';
+import compareVersions from 'compare-versions';
 
 class App extends Component {
     constructor() {
@@ -14,8 +15,11 @@ class App extends Component {
         this.state = {
             apiVersion: null,
             version,
+            minApiVersion: '0.0.0',
+            maxApiVersion: '1.0.0',
             contexts: {},
             supported: false,
+            notFound: true,
         };
         this.onSave = this.onSave.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -65,10 +69,15 @@ class App extends Component {
     async getMeta() {
         const { version, enabled } = await this.api.getMeta();
 
+        const supported =
+            compareVersions(version, this.state.maxApiVersion) < 1 &&
+            compareVersions(version, this.state.minApiVersion) > -1;
+
         this.setState({
             enabled,
             apiVersion: version,
-            supported: Boolean(version),
+            supported,
+            notFound: !Boolean(version),
         });
     }
 
@@ -104,8 +113,11 @@ class App extends Component {
                         <div className="col-sm-auto">
                             <Status
                                 supported={this.state.supported}
+                                notFound={this.state.notFound}
+                                clientVersion={this.state.version}
                                 apiVersion={this.state.apiVersion}
-                                version={this.state.version}
+                                apiMinVersion={this.state.minApiVersion}
+                                apiMaxVersion={this.state.maxApiVersion}
                             />
                         </div>
                     </div>
