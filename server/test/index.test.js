@@ -5,7 +5,7 @@
 
 const express = require('express');
 const Podlet = require('@podium/podlet');
-const DevTool = require('../server/index');
+const DevTool = require('../lib/index');
 const request = require('supertest');
 
 let app;

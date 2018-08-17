@@ -10,7 +10,7 @@ Multiple podlets can be registered at the same time.
 ```js
 'use strict';
 
-const DevTool = require('@podium/devtool');
+const DevTool = require('@podium/dev-tool');
 const Podlet = require('@podium/podlet');
 const app = require('express')();
 
