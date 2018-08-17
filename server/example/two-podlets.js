@@ -1,16 +1,6 @@
-# @podium/devtool
-
-Tool that exposes a development API on Podium podlets and layouts for use in development tools
-
-## Server usage
-
-The following shows how to expose a development API for a podlet.
-Multiple podlets can be registered at the same time.
-
-```js
 'use strict';
 
-const DevTool = require('@podium/dev-tool');
+const DevTool = require('../lib');
 const Podlet = require('@podium/podlet');
 const app = require('express')();
 
@@ -25,28 +15,45 @@ podlet.defaults({
     mountOrigin: '/testing',
 });
 
+const podlet2 = new Podlet({
+    name: 'myPodlet2',
+    version: '1.0.0',
+    defaults: true,
+});
+
+podlet2.defaults({
+    mountPathname: '/blah',
+});
+
 const devTool = new DevTool({
     logger: console,
 });
 devTool.register(podlet);
+devTool.register(podlet2);
 
-app.use(podlet.middleware());
+app.use('/podlet', podlet.middleware());
 
-app.get(podlet.manifest(), (req, res) => {
+app.get(`/podlet${podlet.manifest()}`, (req, res) => {
     res.json(podlet);
 });
 
-app.get(podlet.content(), (req, res) => {
+app.get(`/podlet${podlet.content()}`, (req, res) => {
+    res.json({ context: res.locals.podium.context });
+});
+
+app.use('/podlet2', podlet2.middleware());
+
+app.get(`/podlet2${podlet.manifest()}`, (req, res) => {
+    res.json(podlet);
+});
+
+app.get(`/podlet2${podlet.content()}`, (req, res) => {
     res.json({ context: res.locals.podium.context });
 });
 
 app.listen(7100);
 devTool.listen(8172);
-```
 
-## Endpoints
-
-```js
 // GET http://localhost:7101/
 // GET http://localhost:7101/podlet
 // GET http://localhost:7101/podlet/:name
@@ -54,13 +61,3 @@ devTool.listen(8172);
 // GET http://localhost:7101/context/:name
 // POST http://localhost:7101/context
 // POST http://localhost:7101/context/:name
-```
-
-## Building the chrome extension
-
-```bash
-cd client
-npm run build
-```
-
-The build directory can now be installed as a chrome extension by opening up extensions in chrome at `chrome://extensions/` and choosing "Load unpacked".
