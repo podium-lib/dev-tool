@@ -17,7 +17,7 @@ const app = require('express')();
 const podlet = new Podlet({
     name: 'myPodlet',
     version: '1.0.0',
-    defaults: true,
+    development: true,
 });
 
 podlet.defaults({
