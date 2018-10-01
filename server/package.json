@@ -11,7 +11,6 @@
     "devDependencies": {
         "@podium/podlet": "^2.1.1",
         "@podium/proxy": "^2.2.0",
-        "express": "^4.16.3",
         "jest": "^23.4.2",
         "supertest": "^3.1.0"
     },
@@ -20,9 +19,11 @@
         "@podium/utils": "^2.0.0",
         "abslog": "^2.1.1",
         "body": "^5.1.0",
+        "cors": "^2.8.4",
         "eslint": "^4.19.1",
         "eslint-config-finn": "^3.0.0",
         "eslint-config-finn-prettier": "^3.0.1",
+        "express": "^4.16.3",
         "prettier": "1.12.1"
     }
 }
