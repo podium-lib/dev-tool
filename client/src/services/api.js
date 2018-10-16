@@ -1,6 +1,28 @@
+const PORT = 8172;
+const HOST = 'http://localhost';
+
 export default class Api {
-    host = 'http://localhost';
-    port = 8172;
+    constructor() {
+        const currentUrl = new URL(window.location.href);
+        this._host = currentUrl.searchParams.get('host');
+        this._port = currentUrl.searchParams.get('port');
+    }
+
+    set host(host) {
+        this._host = host;
+    }
+
+    get host() {
+        return this._host || HOST;
+    }
+
+    set port(port) {
+        this._port = port;
+    }
+
+    get port() {
+        return this._port || PORT;
+    }
 
     url(endpoint) {
         const url = new URL(endpoint, this.host + ':' + this.port);

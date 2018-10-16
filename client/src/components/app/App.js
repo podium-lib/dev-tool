@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Status from './status/Status';
 import Container from './container/Container';
+import Connection from './connection/Connection';
 import { version } from '../../../package.json';
 import Api from '../../services/api';
 import Page from '../../services/page';
@@ -23,6 +24,7 @@ class App extends Component {
         };
         this.onSave = this.onSave.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onConnectionChange = this.onConnectionChange.bind(this);
     }
 
     onChange(type, name, key, value) {
@@ -32,6 +34,28 @@ class App extends Component {
                     ...this.state.contexts,
                     [name]: { ...this.state.contexts[name], [key]: value },
                 },
+            });
+        }
+    }
+
+    async onConnectionChange(host, port) {
+        this.api.host = host;
+        this.api.port = port;
+
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('host', host);
+        currentUrl.searchParams.set('port', port);
+        window.history.pushState({}, '', currentUrl.href);
+
+        try {
+            await this.getMeta();
+            await this.getContexts();
+        } catch (err) {
+            console.log(err);
+            this.setState({
+                apiVersion: null,
+                contexts: {},
+                supported: false,
             });
         }
     }
@@ -118,6 +142,11 @@ class App extends Component {
                                 apiVersion={this.state.apiVersion}
                                 apiMinVersion={this.state.minApiVersion}
                                 apiMaxVersion={this.state.maxApiVersion}
+                            />
+                            <Connection
+                                host={this.api.host}
+                                port={this.api.port}
+                                onChange={this.onConnectionChange}
                             />
                         </div>
                     </div>
