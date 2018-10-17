@@ -1,6 +1,6 @@
 {
     "name": "@podium/dev-tool",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "Development tool to improve the experience of working on Podium podlets",
     "main": "lib/index.js",
     "scripts": {
