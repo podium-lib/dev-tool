@@ -9,8 +9,9 @@ const abslog = require('abslog');
 const express = require('express');
 
 module.exports = class DevTool {
-    constructor({ enabled = true, logger } = {}) {
+    constructor({ enabled = true, port = 8172, logger } = {}) {
         this.enabled = enabled;
+        this.port = port;
         this.log = abslog(logger);
         this.log.debug(`${name} ${enabled ? 'enabled' : 'disabled'}`);
 
@@ -128,5 +129,32 @@ module.exports = class DevTool {
 
     listen(port, cb) {
         this.app.listen(port, cb);
+    }
+
+    start() {
+        return new Promise(resolve => {
+            const start = new Date().getTime();
+            this.server = this.app.listen(this.port, () => {
+                const ms = new Date().getTime() - start;
+                this.port = this.server.address().port;
+                this.log.trace(
+                    `dev tool server started on port "${
+                        this.port
+                    }" (in ${ms} ms)`
+                );
+                resolve();
+            });
+        });
+    }
+
+    stop() {
+        return new Promise(resolve => {
+            const start = new Date().getTime();
+            this.server.close(() => {
+                const ms = new Date().getTime() - start;
+                this.log.trace(`dev tool server shutdown in ${ms} ms`);
+                resolve();
+            });
+        });
     }
 };

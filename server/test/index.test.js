@@ -39,8 +39,56 @@ test('get dev tool information', async () => {
     const { body } = await request(devTool.app).get('/');
     expect(body).toEqual({
         enabled: true,
-        version: '0.1.0',
+        version: expect.any(String),
     });
+});
+
+test('start and stop methods', async () => {
+    const logger = {
+        trace: jest.fn(),
+        debug: jest.fn(),
+        info: jest.fn(),
+        warn: jest.fn(),
+        error: jest.fn(),
+        fatal: jest.fn(),
+    };
+    devTool = new DevTool({ logger });
+    devTool.register(podlet);
+
+    await devTool.start();
+    await devTool.stop();
+
+    expect(logger.trace.mock.calls[0][0]).toMatch(
+        'dev tool server started on port "8172" (in'
+    );
+    expect(logger.trace.mock.calls[1][0]).toMatch(
+        'dev tool server shutdown in'
+    );
+    expect(logger.trace).toHaveBeenCalledTimes(2);
+});
+
+test('starting on a random port', async () => {
+    const logger = {
+        trace: jest.fn(),
+        debug: jest.fn(),
+        info: jest.fn(),
+        warn: jest.fn(),
+        error: jest.fn(),
+        fatal: jest.fn(),
+    };
+    devTool = new DevTool({ logger, port: 0 });
+    devTool.register(podlet);
+
+    await devTool.start();
+    await devTool.stop();
+
+    expect(logger.trace.mock.calls[0][0]).toMatch(
+        'dev tool server started on port "'
+    );
+    expect(logger.trace.mock.calls[0][0]).not.toMatch('undefined');
+    expect(logger.trace.mock.calls[0][0]).not.toMatch('null');
+    expect(logger.trace.mock.calls[0][0]).not.toMatch('8172');
+    expect(logger.trace).toHaveBeenCalledTimes(2);
 });
 
 test('get all podlet information', async () => {
