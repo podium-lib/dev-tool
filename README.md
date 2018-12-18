@@ -45,6 +45,53 @@ app.listen(7100);
 devTool.listen(8172);
 ```
 
+## Start and stop methods
+
+Instead of calling listen, you can call the promise based methods `start()` and `stop()`
+
+```js
+const devTool = new DevTool();
+
+await devTool.start();
+await devTool.stop();
+```
+
+You can set a port in the constructor
+
+```js
+const devTool = new DevTool({
+    port: 7185,
+});
+
+await devTool.start();
+await devTool.stop();
+```
+
+If you would like a random port, set port to 0
+
+```js
+const devTool = new DevTool({
+    port: 0,
+});
+
+await devTool.start();
+await devTool.stop();
+```
+
+When using a random port, you can retrieve the `port` after the fact
+
+```js
+const devTool = new DevTool({
+    port: 0,
+});
+
+await devTool.start();
+
+// devTool.port => random assigned port
+
+await devTool.stop();
+```
+
 ## Endpoints
 
 ```js
