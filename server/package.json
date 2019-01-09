@@ -1,7 +1,8 @@
 {
   "name": "@podium/dev-tool",
   "version": "0.3.0",
-  "description": "Development tool to improve the experience of working on Podium podlets",
+  "description":
+    "Development tool to improve the experience of working on Podium podlets",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest"
@@ -15,8 +16,8 @@
     "supertest": "^3.1.0"
   },
   "dependencies": {
-    "@podium/context": "^2.2.1",
-    "@podium/utils": "^2.0.0",
+    "@podium/context": "^3.0.0-beta.1",
+    "@podium/utils": "^3.0.0-beta.1",
     "abslog": "^2.1.1",
     "body": "^5.1.0",
     "cors": "^2.8.4",
