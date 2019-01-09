@@ -1,5 +1,7 @@
 # @podium/devtool
 
+[![Build Status](https://travis-ci.org/podium-lib/dev-tool.svg?branch=master)](https://travis-ci.org/podium-lib/dev-tool)
+
 Tool that exposes a development API on Podium podlets and layouts for use in development tools
 
 ## Server usage
