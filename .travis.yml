@@ -3,11 +3,11 @@ node_js:
     - 11
     - 10
     - 8
-script: cd server && npm run test:coverage && npm run lint
+script: npm run test && npm run lint
 cache:
     node: true
 branches:
     only:
         - master
 dist: trusty
-install: cd server && npm install
+before_install: cd server

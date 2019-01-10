@@ -1,10 +1,12 @@
 {
   "name": "@podium/dev-tool",
   "version": "0.3.0",
-  "description": "Development tool to improve the experience of working on Podium podlets",
+  "description":
+    "Development tool to improve the experience of working on Podium podlets",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "license": "MIT",
