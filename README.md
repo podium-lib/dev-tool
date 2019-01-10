@@ -1,4 +1,4 @@
-# @podium/devtool
+# @podium/dev-tool
 
 [![Build Status](https://travis-ci.org/podium-lib/dev-tool.svg?branch=master)](https://travis-ci.org/podium-lib/dev-tool)
 
