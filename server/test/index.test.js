@@ -16,7 +16,8 @@ beforeEach(() => {
     podlet = new Podlet({
         name: 'myPodlet',
         version: '1.0.0',
-        defaults: true,
+        pathname: '/',
+        development: true,
     });
 
     devTool = new DevTool({});
@@ -123,13 +124,13 @@ test('get all contexts', async () => {
         {
             name: 'myPodlet',
             context: {
-                debug: '',
-                deviceType: '',
-                locale: '',
+                debug: 'false',
+                deviceType: 'desktop',
+                locale: 'en-US',
                 mountOrigin: '',
-                mountPathname: '',
-                publicPathname: '',
-                requestedBy: '',
+                mountPathname: '/',
+                publicPathname: '/',
+                requestedBy: 'myPodlet',
             },
         },
     ]);
@@ -145,7 +146,7 @@ test('set value on all contexts', async () => {
         context: {
             debug: 'false',
             deviceType: 'desktop',
-            locale: 'en-EN',
+            locale: 'en-US',
             mountOrigin: 'http://fake.com:1337',
             mountPathname: '/',
             publicPathname: '/',
@@ -164,7 +165,7 @@ test('set value on all contexts', async () => {
         context: {
             debug: 'false',
             deviceType: 'desktop',
-            locale: 'en-EN',
+            locale: 'en-US',
             mountOrigin: 'http://superfake.com:1337',
             mountPathname: '/',
             publicPathname: '/',
@@ -180,12 +181,12 @@ test('get single context by podlet name', async () => {
         .expect('Content-Type', 'application/json; charset=utf-8');
 
     expect(body).toEqual({
-        publicPathname: '',
-        mountPathname: '',
+        publicPathname: '/',
+        mountPathname: '/',
         mountOrigin: '',
-        requestedBy: '',
-        deviceType: '',
-        locale: '',
-        debug: '',
+        requestedBy: 'myPodlet',
+        deviceType: 'desktop',
+        locale: 'en-US',
+        debug: 'false',
     });
 });
