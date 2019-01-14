@@ -9,5 +9,6 @@ cache:
 branches:
     only:
         - master
+        - /^greenkeeper/.*$/
 dist: trusty
 before_install: cd server
