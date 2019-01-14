@@ -1,6 +1,6 @@
 # @podium/dev-tool
 
-[![Build Status](https://travis-ci.org/podium-lib/dev-tool.svg?branch=master)](https://travis-ci.org/podium-lib/dev-tool)
+[![Build Status](https://travis-ci.org/podium-lib/dev-tool.svg?branch=master)](https://travis-ci.org/podium-lib/dev-tool) [![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/dev-tool.svg)](https://greenkeeper.io/)
 
 Tool that exposes a development API on Podium podlets and layouts for use in development tools
 
