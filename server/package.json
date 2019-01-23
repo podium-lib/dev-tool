@@ -12,7 +12,11 @@
   "devDependencies": {
     "@podium/podlet": "^3.0.0-beta.1",
     "@podium/proxy": "^3.0.0-beta.1",
+    "eslint": "^5.12.0",
+    "eslint-config-finn": "^3.0.1",
+    "eslint-config-finn-prettier": "^3.0.2",
     "jest": "^23.6.0",
+    "prettier": "1.16.1",
     "supertest": "^3.3.0"
   },
   "dependencies": {
@@ -21,10 +25,6 @@
     "abslog": "^2.2.3",
     "body": "^5.1.0",
     "cors": "^2.8.5",
-    "eslint": "^5.12.0",
-    "eslint-config-finn": "^3.0.1",
-    "eslint-config-finn-prettier": "^3.0.2",
-    "express": "^4.16.4",
-    "prettier": "1.16.1"
+    "express": "^4.16.4"
   }
 }
