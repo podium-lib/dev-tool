@@ -1,12 +1,9 @@
-/**
- * @jest-environment node
- */
 'use strict';
 
 const express = require('express');
 const Podlet = require('@podium/podlet');
-const DevTool = require('../lib/index');
 const request = require('supertest');
+const DevTool = require('../lib/index');
 
 let app;
 let podlet;
@@ -60,10 +57,10 @@ test('start and stop methods', async () => {
     await devTool.stop();
 
     expect(logger.trace.mock.calls[0][0]).toMatch(
-        'dev tool server started on port "8172" (in'
+        'dev tool server started on port "8172" (in',
     );
     expect(logger.trace.mock.calls[1][0]).toMatch(
-        'dev tool server shutdown in'
+        'dev tool server shutdown in',
     );
     expect(logger.trace).toHaveBeenCalledTimes(2);
 });
@@ -84,7 +81,7 @@ test('starting on a random port', async () => {
     await devTool.stop();
 
     expect(logger.trace.mock.calls[0][0]).toMatch(
-        'dev tool server started on port "'
+        'dev tool server started on port "',
     );
     expect(logger.trace.mock.calls[0][0]).not.toMatch('undefined');
     expect(logger.trace.mock.calls[0][0]).not.toMatch('null');

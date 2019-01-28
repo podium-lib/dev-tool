@@ -1,15 +1,18 @@
 {
-  "root": true,
-  "extends": ["finn", "finn/node", "finn-prettier"],
-  "parserOptions": {
-    "ecmaVersion": 2017
-  },
-  "overrides": [
-    {
-      "files": "test/**/*",
-      "env": {
+    "env": {
+        "node": true,
         "jest": true
-      }
+    },
+    "extends": ["airbnb-base", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "plugins": ["prettier"],
+    "root": true,
+    "rules": {
+        "class-methods-use-this": [0],
+        "indent": [1, 4],
+        "prettier/prettier": ["error"],
+        "strict": [0, "global"]
     }
-  ]
 }

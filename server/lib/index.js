@@ -3,10 +3,10 @@
 const { promisify } = require('util');
 const body = promisify(require('body'));
 const Context = require('@podium/context');
-const { version, name } = require('../package.json');
 const cors = require('cors');
 const abslog = require('abslog');
 const express = require('express');
+const { version, name } = require('../package.json');
 
 module.exports = class DevTool {
     constructor({ enabled = true, port = 8172, logger } = {}) {
@@ -39,7 +39,6 @@ module.exports = class DevTool {
     }
 
     normalize(context = {}) {
-        context = context || {};
         let ctx = {};
 
         for (const key of this.contextParserNames) {
@@ -50,8 +49,8 @@ module.exports = class DevTool {
 
         this.log.trace(
             `Normalized set context values "${JSON.stringify(
-                context
-            )}" to context object "${JSON.stringify(ctx)}"`
+                context,
+            )}" to context object "${JSON.stringify(ctx)}"`,
         );
 
         return ctx;
@@ -65,8 +64,8 @@ module.exports = class DevTool {
 
         this.log.trace(
             `Denormalized context object "${JSON.stringify(
-                context
-            )}" to set context values "${JSON.stringify(ctx)}"`
+                context,
+            )}" to set context values "${JSON.stringify(ctx)}"`,
         );
 
         return ctx;
@@ -81,7 +80,7 @@ module.exports = class DevTool {
 
         if (req.params.name) {
             podlets = podlets.filter(
-                podlet => podlet.name === req.params.name
+                podlet => podlet.name === req.params.name,
             )[0];
         }
 
@@ -140,7 +139,7 @@ module.exports = class DevTool {
                 this.log.trace(
                     `dev tool server started on port "${
                         this.port
-                    }" (in ${ms} ms)`
+                    }" (in ${ms} ms)`,
                 );
                 resolve();
             });
