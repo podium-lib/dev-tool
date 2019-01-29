@@ -4,18 +4,18 @@
   "description": "Development tool to improve the experience of working on Podium podlets",
   "license": "MIT",
   "keywords": [
-      "micro services",
-      "micro frontend",
-      "components",
-      "podium",
-      "proxy"
+    "micro services",
+    "micro frontend",
+    "components",
+    "podium",
+    "proxy"
   ],
   "repository": {
-      "type": "git",
-      "url": "git@github.com:podium-lib/dev-tool.git"
+    "type": "git",
+    "url": "git@github.com:podium-lib/dev-tool.git"
   },
   "bugs": {
-      "url": "https://github.com/podium-lib/issues"
+    "url": "https://github.com/podium-lib/issues"
   },
   "homepage": "https://podium-lib.io/",
   "main": "lib/index.js",

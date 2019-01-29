@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 'use strict';
 
 const { promisify } = require('util');
@@ -79,9 +81,9 @@ module.exports = class DevTool {
         let podlets = this.podlets.map(podlet => podlet.toJSON());
 
         if (req.params.name) {
-            podlets = podlets.filter(
+            [podlets] = podlets.filter(
                 podlet => podlet.name === req.params.name,
-            )[0];
+            );
         }
 
         res.send(podlets);
@@ -94,9 +96,9 @@ module.exports = class DevTool {
         }));
 
         if (req.params.name) {
-            contexts = contexts
+            [contexts] = contexts
                 .filter(context => context.name === req.params.name)
-                .map(({ context }) => context)[0];
+                .map(({ context }) => context);
         }
 
         return res.json(contexts);
@@ -110,6 +112,7 @@ module.exports = class DevTool {
                 const context = this.denormalize(JSON.parse(response));
                 for (const podlet of this.podlets) {
                     if (req.params.name && req.params.name !== podlet.name)
+                        // eslint-disable-next-line no-continue
                         continue;
                     podlet.defaults(context);
                 }
