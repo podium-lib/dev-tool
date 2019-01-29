@@ -1,10 +1,12 @@
 # @podium/dev-tool
 
+Tool that exposes a development API on Podium podlets and layouts for use in Chrome development tools.
+
 [![Build Status](https://travis-ci.org/podium-lib/dev-tool.svg?branch=master)](https://travis-ci.org/podium-lib/dev-tool)
 [![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/dev-tool.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/dev-tool/badge.svg)](https://snyk.io/test/github/podium-lib/dev-tool)
+[![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/dev-tool/badge.svg?targetFile=server%2Fpackage.json)](https://snyk.io/test/github/podium-lib/dev-tool?targetFile=server%2Fpackage.json)
+[![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/dev-tool/badge.svg?targetFile=client%2Fpackage.json)](https://snyk.io/test/github/podium-lib/dev-tool?targetFile=client%2Fpackage.json)
 
-Tool that exposes a development API on Podium podlets and layouts for use in development tools
 
 ## Server usage
 
