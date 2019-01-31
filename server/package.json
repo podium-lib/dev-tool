@@ -28,8 +28,8 @@
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "devDependencies": {
-    "@podium/podlet": "3.0.0-beta.1",
-    "@podium/proxy": "3.0.0-beta.2",
+    "@podium/podlet": "3.0.0-beta.3",
+    "@podium/proxy": "3.0.0-beta.3",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.0.0",
@@ -40,7 +40,7 @@
     "supertest": "^3.4.2"
   },
   "dependencies": {
-    "@podium/context": "^3.0.0-beta.1",
+    "@podium/context": "^3.0.0-beta.2",
     "@podium/utils": "3.0.0",
     "abslog": "^2.2.3",
     "body": "^5.1.0",
