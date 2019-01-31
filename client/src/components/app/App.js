@@ -16,8 +16,8 @@ class App extends Component {
         this.state = {
             apiVersion: null,
             version,
-            minApiVersion: '0.0.0',
-            maxApiVersion: '1.0.0',
+            minApiVersion: '3.0.0',
+            maxApiVersion: '4.0.0',
             contexts: {},
             supported: false,
             notFound: true,
@@ -93,13 +93,20 @@ class App extends Component {
     async getMeta() {
         const { version, enabled } = await this.api.getMeta();
 
+        const max = this.state.maxApiVersion.replace(/-[(beta)(alpha)].*/, '');
+        const min = this.state.minApiVersion.replace(/-[(beta)(alpha)].*/, '');
+        let curr = version;
+
+        if (version) {
+            curr = version.replace(/-[(beta)(alpha)].*/, '');
+        }
+
         const supported =
-            compareVersions(version, this.state.maxApiVersion) < 1 &&
-            compareVersions(version, this.state.minApiVersion) > -1;
+            compareVersions(curr, max) < 1 && compareVersions(curr, min) > -1;
 
         this.setState({
             enabled,
-            apiVersion: version,
+            apiVersion: curr,
             supported,
             notFound: !Boolean(version),
         });
