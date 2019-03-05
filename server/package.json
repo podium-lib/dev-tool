@@ -28,7 +28,7 @@
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "devDependencies": {
-    "@podium/podlet": "3.0.0",
+    "@podium/podlet": "3.0.1",
     "@podium/proxy": "3.0.1",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
