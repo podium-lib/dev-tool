@@ -7,7 +7,7 @@
     "compare-versions": "^3.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.8"
   },
   "homepage": "https://podium-lib.io/",
   "scripts": {
