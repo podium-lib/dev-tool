@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - '11'
+  - '12'
   - '10'
   - '8'
 
@@ -10,7 +10,6 @@ os:
   - osx
   - windows
 
-before_install: cd server
 install:
   - npm install --ignore-scripts
 
@@ -23,31 +22,35 @@ jobs:
   fast_finish: true
 
   include:
+
     # Nightlies
     - stage: Node.js pre-releases
       node_js: '12'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/
-    - node_js: '11'
+    -
+      node_js: '10'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/
-    - node_js: '10'
-      if: type = cron
-      env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/
-    - node_js: '8'
+    -
+      node_js: '8'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/
 
     # Release Candidates
-    - node_js: '11'
+    -
+      node_js: '12'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/
-    - node_js: '10'
+    -
+      node_js: '10'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/
-    - node_js: '8'
+    -
+      node_js: '8'
       if: type = cron
       env: NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/
+
 
 notifications:
   email:
