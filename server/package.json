@@ -40,7 +40,7 @@
     "supertest": "^4.0.0"
   },
   "dependencies": {
-    "@podium/context": "^3.0.0-beta.2",
+    "@podium/context": "^4.0.0",
     "@podium/utils": "3.1.2",
     "abslog": "^2.2.3",
     "body": "^5.1.0",
