@@ -94,6 +94,8 @@ test('get all podlet information', async () => {
     expect(body).toEqual([
         {
             assets: { css: '', js: '' },
+            css: [],
+            js: [],
             content: '/',
             fallback: '',
             name: 'myPodlet',
@@ -107,6 +109,8 @@ test('get single podlet information', async () => {
     const { body } = await request(devTool.app).get('/podlet/myPodlet');
     expect(body).toEqual({
         assets: { css: '', js: '' },
+        css: [],
+        js: [],
         content: '/',
         fallback: '',
         name: 'myPodlet',

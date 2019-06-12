@@ -28,24 +28,24 @@
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "devDependencies": {
-    "@podium/podlet": "3.0.2",
-    "@podium/proxy": "3.0.4",
+    "@podium/podlet": "^4.0.0",
+    "@podium/proxy": "^4.0.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.0.0",
+    "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^24.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
     "prettier": "^1.16.3",
-    "supertest": "^4.0.0"
+    "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@podium/context": "^3.0.0-beta.2",
-    "@podium/utils": "3.1.2",
-    "abslog": "^2.2.3",
+    "@podium/context": "^4.0.0",
+    "@podium/utils": "^4.0.0",
+    "abslog": "^2.4.0",
     "body": "^5.1.0",
     "cors": "^2.8.5",
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   },
   "jest": {
     "coveragePathIgnorePatterns": [

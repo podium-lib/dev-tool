@@ -140,9 +140,7 @@ module.exports = class DevTool {
                 const ms = new Date().getTime() - start;
                 this.port = this.server.address().port;
                 this.log.trace(
-                    `dev tool server started on port "${
-                        this.port
-                    }" (in ${ms} ms)`,
+                    `dev tool server started on port "${this.port}" (in ${ms} ms)`,
                 );
                 resolve();
             });
