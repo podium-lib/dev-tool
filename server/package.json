@@ -32,7 +32,7 @@
     "@podium/proxy": "^4.0.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
