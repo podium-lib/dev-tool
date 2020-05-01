@@ -1,25 +1,29 @@
 {
-    "name": "podium-dev-tools",
-    "version": "0.2.1",
-    "private": true,
-    "dependencies": {
-        "classnames": "^2.2.6",
-        "compare-versions": "^3.4.0",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1"
-    },
-    "homepage": "https://podium-lib.io/",
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
-        "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject"
-    },
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
-    ]
+  "name": "podium-dev-tools",
+  "version": "0.2.1",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "compare-versions": "^3.4.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "snyk": "^1.316.1"
+  },
+  "homepage": "https://podium-lib.io/",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "snyk": true
 }
