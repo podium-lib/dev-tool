@@ -1,9 +1,9 @@
-'use strict';
-
+const { beforeEach, test } = require('node:test');
+const assert = require('node:assert');
 const express = require('express');
 const Podlet = require('@podium/podlet');
 const request = require('supertest');
-const DevTool = require('../lib/index');
+const DevTool = require('./index');
 
 let app;
 let podlet;
@@ -35,20 +35,18 @@ beforeEach(() => {
 
 test('get dev tool information', async () => {
     const { body } = await request(devTool.app).get('/');
-    expect(body).toEqual({
-        enabled: true,
-        version: expect.any(String),
-    });
+    assert.ok(body.enabled);
+    assert.ok(body.version);
 });
 
-test('start and stop methods', async () => {
+test('start and stop methods', async (t) => {
     const logger = {
-        trace: jest.fn(),
-        debug: jest.fn(),
-        info: jest.fn(),
-        warn: jest.fn(),
-        error: jest.fn(),
-        fatal: jest.fn(),
+        trace: t.mock.fn(),
+        debug: t.mock.fn(),
+        info: t.mock.fn(),
+        warn: t.mock.fn(),
+        error: t.mock.fn(),
+        fatal: t.mock.fn(),
     };
     devTool = new DevTool({ logger });
     devTool.register(podlet);
@@ -56,23 +54,25 @@ test('start and stop methods', async () => {
     await devTool.start();
     await devTool.stop();
 
-    expect(logger.trace.mock.calls[0][0]).toMatch(
-        'dev tool server started on port "8172" (in',
+    assert.match(
+        logger.trace.mock.calls[0].arguments[0],
+        /dev tool server started on port "8172" \(in/,
     );
-    expect(logger.trace.mock.calls[1][0]).toMatch(
-        'dev tool server shutdown in',
+    assert.match(
+        logger.trace.mock.calls[1].arguments[0],
+        /dev tool server shutdown in/,
     );
-    expect(logger.trace).toHaveBeenCalledTimes(2);
+    assert.equal(logger.trace.mock.calls.length, 2);
 });
 
-test('starting on a random port', async () => {
+test('starting on a random port', async (t) => {
     const logger = {
-        trace: jest.fn(),
-        debug: jest.fn(),
-        info: jest.fn(),
-        warn: jest.fn(),
-        error: jest.fn(),
-        fatal: jest.fn(),
+        trace: t.mock.fn(),
+        debug: t.mock.fn(),
+        info: t.mock.fn(),
+        warn: t.mock.fn(),
+        error: t.mock.fn(),
+        fatal: t.mock.fn(),
     };
     devTool = new DevTool({ logger, port: 0 });
     devTool.register(podlet);
@@ -80,18 +80,19 @@ test('starting on a random port', async () => {
     await devTool.start();
     await devTool.stop();
 
-    expect(logger.trace.mock.calls[0][0]).toMatch(
-        'dev tool server started on port "',
+    assert.match(
+        logger.trace.mock.calls[0].arguments[0],
+        /dev tool server started on port "/,
     );
-    expect(logger.trace.mock.calls[0][0]).not.toMatch('undefined');
-    expect(logger.trace.mock.calls[0][0]).not.toMatch('null');
-    expect(logger.trace.mock.calls[0][0]).not.toMatch('8172');
-    expect(logger.trace).toHaveBeenCalledTimes(2);
+    assert.notEqual(logger.trace.mock.calls[0].arguments[0], 'undefined');
+    assert.notEqual(logger.trace.mock.calls[0].arguments[0], 'null');
+    assert.notEqual(logger.trace.mock.calls[0].arguments[0], '8172');
+    assert.equal(logger.trace.mock.calls.length, 2);
 });
 
 test('get all podlet information', async () => {
     const { body } = await request(devTool.app).get('/podlet');
-    expect(body).toEqual([
+    assert.deepStrictEqual(body, [
         {
             assets: { css: '', js: '' },
             css: [],
@@ -107,7 +108,7 @@ test('get all podlet information', async () => {
 
 test('get single podlet information', async () => {
     const { body } = await request(devTool.app).get('/podlet/myPodlet');
-    expect(body).toEqual({
+    assert.deepStrictEqual(body, {
         assets: { css: '', js: '' },
         css: [],
         js: [],
@@ -121,7 +122,7 @@ test('get single podlet information', async () => {
 
 test('get all contexts', async () => {
     const { body } = await request(devTool.app).get('/context');
-    expect(body).toEqual([
+    assert.deepStrictEqual(body, [
         {
             name: 'myPodlet',
             context: {
@@ -143,7 +144,7 @@ test('set value on all contexts', async () => {
         .send({ mountOrigin: 'http://fake.com:1337' });
 
     const { body } = await request(app).get('/');
-    expect(body).toEqual({
+    assert.deepStrictEqual(body, {
         context: {
             debug: 'false',
             deviceType: 'desktop',
@@ -162,7 +163,7 @@ test('set value on all contexts', async () => {
         .send({ mountOrigin: 'http://superfake.com:1337' });
 
     const { body } = await request(app).get('/');
-    expect(body).toEqual({
+    assert.deepStrictEqual(body, {
         context: {
             debug: 'false',
             deviceType: 'desktop',
@@ -181,7 +182,7 @@ test('get single context by podlet name', async () => {
         .expect(200)
         .expect('Content-Type', 'application/json; charset=utf-8');
 
-    expect(body).toEqual({
+    assert.deepStrictEqual(body, {
         publicPathname: '/podium-resource/myPodlet',
         mountPathname: '/',
         mountOrigin: '',

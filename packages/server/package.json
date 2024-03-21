@@ -22,7 +22,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "node --test src/**/*.test.js"
+    "test": "node --test"
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "devDependencies": {
