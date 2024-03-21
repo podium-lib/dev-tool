@@ -53,4 +53,4 @@ GitHub Actions workflows:
 - [Build and test pull requests](./.github/workflows/test.yml)
 - [Build and release changes on `main`](./.github/workflows/release.yml)
 
-You'll find the workflow logs and results in the [Actions](https://github.schibsted.io/nmp-web/template-module-workspace/actions) tab.
+You'll find the workflow logs and results in the Actions tab.
