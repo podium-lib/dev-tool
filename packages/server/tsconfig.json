@@ -1,0 +1,8 @@
+{
+	"extends": "../../tsconfig.json",
+	"include": ["./lib/**/*.js"],
+	"exclude": ["./lib/**/*.test.js"],
+	"compilerOptions": {
+		"outDir": "types"
+	}
+}

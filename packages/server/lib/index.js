@@ -1,160 +1,192 @@
-/* eslint-disable no-restricted-syntax */
+import { promisify } from "node:util";
+import fs from "node:fs";
+import body from "body";
+import Context from "@podium/context";
+import cors from "cors";
+import abslog from "abslog";
+import express from "express";
 
-'use strict';
+const promisifiedBody = promisify(body);
+const { name, version } = JSON.parse(fs.readFileSync(new URL(`../package.json`, import.meta.url), "utf-8"));
 
-const { promisify } = require('util');
-const body = promisify(require('body'));
-const Context = require('@podium/context');
-const cors = require('cors');
-const abslog = require('abslog');
-const express = require('express');
-const { version, name } = require('../package.json');
+/**
+ * @typedef {object} DeveloperToolOptions
+ * @property {boolean} [enabled=true] - Enable the developer tool
+ * @property {number} [port=8172] - Port that browser extension should connect to
+ * @property {object} [logger=undefined] - Logger conforming to the [log4j interface](https://github.com/trygve-lie/abslog?tab=readme-ov-file#interface), or console
+ */
 
-module.exports = class DevTool {
-    constructor({ enabled = true, port = 8172, logger } = {}) {
-        this.enabled = enabled;
-        this.port = port;
-        this.log = abslog(logger);
-        this.log.debug(`${name} ${enabled ? 'enabled' : 'disabled'}`);
+/**
+ * Class implementing APIs for the Podium browser extension.
+ *
+ * @see {@link https://podium-lib.io/docs/browser-extension}
+ */
+export default class DeveloperTool {
+	/**
+	 * @type {import('express').Express}
+	 */
+	app;
 
-        this.podlets = [];
+	/**
+	 * @type {import('@podium/podlet').default[]}
+	 */
+	#podlets = [];
 
-        const context = new Context({ name: 'devTools' });
-        this.contextParserNames = Array.from(context.parsers.keys());
+	/**
+	 * @type {import('abslog')}
+	 */
+	#log;
 
-        this.app = express();
-        this.app.use(cors());
-        this.routes();
-    }
+	#enabled = true;
 
-    routes() {
-        this.app.get('/', this.getVersion.bind(this));
+	#port = 8172;
 
-        if (!this.enabled) return;
+	/**
+	 * @param {DeveloperToolOptions} options
+	 */
+	constructor({ enabled = true, port = 8172, logger = undefined } = {}) {
+		this.#enabled = enabled;
+		this.#port = port;
+		this.#log = abslog(logger);
 
-        this.app.get('/podlet', this.getPodlet.bind(this));
-        this.app.get('/podlet/:name', this.getPodlet.bind(this));
-        this.app.get('/context', this.getContext.bind(this));
-        this.app.get('/context/:name', this.getContext.bind(this));
-        this.app.post('/context', this.postContext.bind(this));
-        this.app.post('/context/:name', this.postContext.bind(this));
-    }
+		this.#log.debug(`${name}@${version} ${enabled ? "enabled" : "disabled"}`);
 
-    normalize(context = {}) {
-        let ctx = {};
+		const context = new Context({ name: "devTools" });
+		this.contextParserNames = Array.from(context.parsers.keys());
 
-        for (const key of this.contextParserNames) {
-            ctx[key] = context[key] || '';
-        }
+		this.app = express();
+		this.app.use(cors());
 
-        ctx = Object.assign(ctx, context);
+		this.app.get("/", this.#getVersion.bind(this));
 
-        this.log.trace(
-            `Normalized set context values "${JSON.stringify(
-                context,
-            )}" to context object "${JSON.stringify(ctx)}"`,
-        );
+		if (!this.#enabled) {
+			return;
+		}
 
-        return ctx;
-    }
+		this.app.get("/podlet", this.#getPodlet.bind(this));
+		this.app.get("/podlet/:name", this.#getPodlet.bind(this));
+		this.app.get("/context", this.#getContext.bind(this));
+		this.app.get("/context/:name", this.#getContext.bind(this));
+		this.app.post("/context", this.#postContext.bind(this));
+		this.app.post("/context/:name", this.#postContext.bind(this));
+	}
 
-    denormalize(context) {
-        const ctx = {};
-        for (const key of Object.keys(context)) {
-            if (context[key]) ctx[key] = context[key];
-        }
+	#normalize(context = {}) {
+		let ctx = {};
 
-        this.log.trace(
-            `Denormalized context object "${JSON.stringify(
-                context,
-            )}" to set context values "${JSON.stringify(ctx)}"`,
-        );
+		for (const key of this.contextParserNames) {
+			ctx[key] = context[key] || "";
+		}
 
-        return ctx;
-    }
+		ctx = Object.assign(ctx, context);
 
-    getVersion(req, res) {
-        return res.json({ version, enabled: this.enabled });
-    }
+		this.#log.trace(
+			`Normalized set context values "${JSON.stringify(context)}" to context object "${JSON.stringify(ctx)}"`,
+		);
 
-    getPodlet(req, res) {
-        let podlets = this.podlets.map(podlet => podlet.toJSON());
+		return ctx;
+	}
 
-        if (req.params.name) {
-            [podlets] = podlets.filter(
-                podlet => podlet.name === req.params.name,
-            );
-        }
+	#denormalize(context) {
+		const ctx = {};
+		for (const key of Object.keys(context)) {
+			if (context[key]) ctx[key] = context[key];
+		}
 
-        res.send(podlets);
-    }
+		this.#log.trace(
+			`Denormalized context object "${JSON.stringify(context)}" to set context values "${JSON.stringify(ctx)}"`,
+		);
 
-    getContext(req, res) {
-        let contexts = this.podlets.map(podlet => ({
-            name: podlet.name,
-            context: this.normalize(podlet.defaults()),
-        }));
+		return ctx;
+	}
 
-        if (req.params.name) {
-            [contexts] = contexts
-                .filter(context => context.name === req.params.name)
-                .map(({ context }) => context);
-        }
+	#getVersion(req, res) {
+		return res.json({ version, enabled: this.#enabled });
+	}
 
-        return res.json(contexts);
-    }
+	#getPodlet(req, res) {
+		let podlets = this.#podlets.map((podlet) => podlet.toJSON());
 
-    async postContext(req, res) {
-        try {
-            const response = await body(req, res);
+		if (req.params.name) {
+			// @ts-ignore
+			[podlets] = podlets.filter((podlet) => podlet.name === req.params.name);
+		}
 
-            if (response) {
-                const context = this.denormalize(JSON.parse(response));
-                for (const podlet of this.podlets) {
-                    if (req.params.name && req.params.name !== podlet.name)
-                        // eslint-disable-next-line no-continue
-                        continue;
-                    podlet.defaults(context);
-                }
-            }
+		res.send(podlets);
+	}
 
-            return res.sendStatus(204);
-        } catch (err) {
-            this.log.error(err);
-            return res.sendStatus(500);
-        }
-    }
+	#getContext(req, res) {
+		let contexts = this.#podlets.map((podlet) => ({
+			name: podlet.name,
+			context: this.#normalize(podlet.defaults()),
+		}));
 
-    register(podlet) {
-        this.podlets.push(podlet);
-    }
+		if (req.params.name) {
+			// @ts-ignore
+			[contexts] = contexts.filter((context) => context.name === req.params.name).map(({ context }) => context);
+		}
 
-    listen(port, cb) {
-        this.app.listen(port, cb);
-    }
+		return res.json(contexts);
+	}
 
-    start() {
-        return new Promise(resolve => {
-            const start = new Date().getTime();
-            this.server = this.app.listen(this.port, () => {
-                const ms = new Date().getTime() - start;
-                this.port = this.server.address().port;
-                this.log.trace(
-                    `dev tool server started on port "${this.port}" (in ${ms} ms)`,
-                );
-                resolve();
-            });
-        });
-    }
+	async #postContext(req, res) {
+		try {
+			const response = await promisifiedBody(req);
 
-    stop() {
-        return new Promise(resolve => {
-            const start = new Date().getTime();
-            this.server.close(() => {
-                const ms = new Date().getTime() - start;
-                this.log.trace(`dev tool server shutdown in ${ms} ms`);
-                resolve();
-            });
-        });
-    }
-};
+			if (response) {
+				const context = this.#denormalize(JSON.parse(response));
+				for (const podlet of this.#podlets) {
+					if (req.params.name && req.params.name !== podlet.name)
+						// eslint-disable-next-line no-continue
+						continue;
+					podlet.defaults(context);
+				}
+			}
+
+			return res.sendStatus(204);
+		} catch (err) {
+			this.#log.error(err);
+			return res.sendStatus(500);
+		}
+	}
+
+	/**
+	 * @param {import('@podium/podlet').default} podlet
+	 */
+	register(podlet) {
+		this.#podlets.push(podlet);
+	}
+
+	/**
+	 * Start the developer tool server.
+	 * @returns {Promise<void>}
+	 * @see {@link DeveloperTool.stop}
+	 */
+	start() {
+		return new Promise((resolve) => {
+			const start = new Date().getTime();
+			this.server = this.app.listen(this.#port, () => {
+				const ms = new Date().getTime() - start;
+				this.#port = this.server.address().port;
+				this.#log.trace(`dev tool server started on port "${this.#port}" (in ${ms} ms)`);
+				resolve();
+			});
+		});
+	}
+
+	/**
+	 * Stops the developer tool server.
+	 * @returns {Promise<void>}
+	 * @see {@link DeveloperTool.start}
+	 */
+	stop() {
+		return new Promise((resolve) => {
+			const start = new Date().getTime();
+			this.server.close(() => {
+				const ms = new Date().getTime() - start;
+				this.#log.trace(`dev tool server shutdown in ${ms} ms`);
+				resolve();
+			});
+		});
+	}
+}

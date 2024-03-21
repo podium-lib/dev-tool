@@ -1,41 +1,44 @@
 {
-  "name": "@podium/dev-tool",
-  "version": "4.0.0",
-  "description": "Development tool to improve the experience of working on Podium podlets",
-  "license": "MIT",
-  "keywords": [
-    "micro services",
-    "micro frontend",
-    "components",
-    "podium",
-    "proxy"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:podium-lib/dev-tool.git"
-  },
-  "bugs": {
-    "url": "https://github.com/podium-lib/issues"
-  },
-  "homepage": "https://podium-lib.io/",
-  "main": "lib/index.js",
-  "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "test": "node --test"
-  },
-  "author": "Richard Walker <richard.walker@schibsted.com>",
-  "devDependencies": {
-    "@podium/podlet": "5.0.6",
-    "@podium/proxy": "5.0.4",
-    "supertest": "6.3.4"
-  },
-  "dependencies": {
-    "@podium/context": "^5.0.0",
-    "@podium/utils": "^5.0.0",
-    "abslog": "^2.4.0",
-    "body": "^5.1.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
-  }
+	"name": "@podium/dev-tool",
+	"version": "4.0.0",
+	"type": "module",
+	"description": "Development tool to improve the experience of working on Podium podlets",
+	"license": "MIT",
+	"keywords": [
+		"micro services",
+		"micro frontend",
+		"components",
+		"podium",
+		"proxy"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:podium-lib/dev-tool.git"
+	},
+	"bugs": {
+		"url": "https://github.com/podium-lib/issues"
+	},
+	"homepage": "https://podium-lib.io/",
+	"main": "lib/index.js",
+	"types": "types/index.d.ts",
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix .",
+		"test": "node --test",
+		"types": "tsc --declaration --emitDeclarationOnly"
+	},
+	"author": "Richard Walker <richard.walker@schibsted.com>",
+	"devDependencies": {
+		"@podium/podlet": "5.0.6",
+		"@podium/proxy": "5.0.4",
+		"supertest": "6.3.4"
+	},
+	"dependencies": {
+		"@podium/context": "^5.0.0",
+		"@podium/utils": "^5.0.0",
+		"abslog": "^2.4.0",
+		"body": "^5.1.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.1"
+	}
 }
