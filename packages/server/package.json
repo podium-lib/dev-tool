@@ -22,43 +22,20 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "jest",
-    "test:verbose": "jest --verbose",
-    "test:coverage": "jest --coverage"
+    "test": "node --test src/**/*.test.js"
   },
   "author": "Richard Walker <richard.walker@schibsted.com>",
   "devDependencies": {
-    "@podium/podlet": "^4.0.0",
-    "@podium/proxy": "^4.0.0",
-    "eslint": "^5.12.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.8.0",
-    "prettier": "^1.16.3",
-    "supertest": "^4.0.2"
+    "@podium/podlet": "5.0.6",
+    "@podium/proxy": "5.0.4",
+    "supertest": "6.3.4"
   },
   "dependencies": {
-    "@podium/context": "^4.0.0",
-    "@podium/utils": "^4.0.0",
+    "@podium/context": "^5.0.0",
+    "@podium/utils": "^5.0.0",
     "abslog": "^2.4.0",
     "body": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1"
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 60,
-        "functions": 60,
-        "lines": 60,
-        "statements": 60
-      }
-    },
-    "testEnvironment": "node"
   }
 }
