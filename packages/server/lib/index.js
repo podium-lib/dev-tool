@@ -10,22 +10,25 @@ const promisifiedBody = promisify(body);
 const { name, version } = JSON.parse(fs.readFileSync(new URL(`../package.json`, import.meta.url), "utf-8"));
 
 /**
- * @typedef {object} DeveloperToolOptions
+ * @typedef {object} DevToolOptions
  * @property {boolean} [enabled=true] - Enable the developer tool
- * @property {number} [port=8172] - Port that browser extension should connect to
+ * @property {number} [port=8172] - Port that browser extension should connect to. Set to 0 to get a randomly assigned port, then read the port from the `port` property after calling {@link DevTool.start}.
  * @property {object} [logger=undefined] - Logger conforming to the [log4j interface](https://github.com/trygve-lie/abslog?tab=readme-ov-file#interface), or console
  */
 
 /**
  * Class implementing APIs for the Podium browser extension.
- *
- * @see {@link https://podium-lib.io/docs/browser-extension}
  */
-export default class DeveloperTool {
+export default class DevTool {
 	/**
 	 * @type {import('express').Express}
 	 */
 	app;
+
+	/**
+	 * @type {number}
+	 */
+	port = 8172;
 
 	/**
 	 * @type {import('@podium/podlet').default[]}
@@ -39,14 +42,12 @@ export default class DeveloperTool {
 
 	#enabled = true;
 
-	#port = 8172;
-
 	/**
-	 * @param {DeveloperToolOptions} options
+	 * @param {DevToolOptions} options
 	 */
 	constructor({ enabled = true, port = 8172, logger = undefined } = {}) {
 		this.#enabled = enabled;
-		this.#port = port;
+		this.port = port;
 		this.#log = abslog(logger);
 
 		this.#log.debug(`${name}@${version} ${enabled ? "enabled" : "disabled"}`);
@@ -160,15 +161,15 @@ export default class DeveloperTool {
 	/**
 	 * Start the developer tool server.
 	 * @returns {Promise<void>}
-	 * @see {@link DeveloperTool.stop}
+	 * @see {@link DevTool.stop}
 	 */
 	start() {
 		return new Promise((resolve) => {
 			const start = new Date().getTime();
-			this.server = this.app.listen(this.#port, () => {
+			this.server = this.app.listen(this.port, () => {
 				const ms = new Date().getTime() - start;
-				this.#port = this.server.address().port;
-				this.#log.trace(`dev tool server started on port "${this.#port}" (in ${ms} ms)`);
+				this.port = this.server.address().port;
+				this.#log.trace(`dev tool server started on port "${this.port}" (in ${ms} ms)`);
 				resolve();
 			});
 		});
@@ -177,7 +178,7 @@ export default class DeveloperTool {
 	/**
 	 * Stops the developer tool server.
 	 * @returns {Promise<void>}
-	 * @see {@link DeveloperTool.start}
+	 * @see {@link DevTool.start}
 	 */
 	stop() {
 		return new Promise((resolve) => {
