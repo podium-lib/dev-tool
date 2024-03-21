@@ -130,7 +130,7 @@ test('get all contexts', async () => {
                 locale: 'en-US',
                 mountOrigin: '',
                 mountPathname: '/',
-                publicPathname: '/',
+                publicPathname: '/podium-resource/myPodlet',
                 requestedBy: 'myPodlet',
             },
         },
@@ -150,7 +150,7 @@ test('set value on all contexts', async () => {
             locale: 'en-US',
             mountOrigin: 'http://fake.com:1337',
             mountPathname: '/',
-            publicPathname: '/',
+            publicPathname: '/podium-resource/myPodlet',
             requestedBy: 'myPodlet',
         },
     });
@@ -169,7 +169,7 @@ test('set value on all contexts', async () => {
             locale: 'en-US',
             mountOrigin: 'http://superfake.com:1337',
             mountPathname: '/',
-            publicPathname: '/',
+            publicPathname: '/podium-resource/myPodlet',
             requestedBy: 'myPodlet',
         },
     });
@@ -182,7 +182,7 @@ test('get single context by podlet name', async () => {
         .expect('Content-Type', 'application/json; charset=utf-8');
 
     expect(body).toEqual({
-        publicPathname: '/',
+        publicPathname: '/podium-resource/myPodlet',
         mountPathname: '/',
         mountOrigin: '',
         requestedBy: 'myPodlet',
