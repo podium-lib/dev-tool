@@ -1,164 +1,152 @@
-import React, { Component } from 'react';
-import './App.css';
-import Status from './status/Status';
-import Container from './container/Container';
-import Connection from './connection/Connection';
-import { version } from '../../../package.json';
-import Api from '../../services/api';
-import Page from '../../services/page';
-import compareVersions from 'compare-versions';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Status from "./status/Status";
+import Container from "./container/Container";
+import Connection from "./connection/Connection";
+import packageInfo from "../../../package.json";
+import Api from "../../services/api";
+import Page from "../../services/page";
+import { compareVersions } from "compare-versions";
 
-class App extends Component {
-    constructor() {
-        super();
-        this.api = new Api();
-        this.page = new Page();
-        this.state = {
-            apiVersion: null,
-            version,
-            minApiVersion: '3.0.0',
-            contexts: {},
-            supported: false,
-            notFound: true,
-        };
-        this.onSave = this.onSave.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.onConnectionChange = this.onConnectionChange.bind(this);
+const App = () => {
+  const api = new Api();
+  const page = new Page();
+
+  const [state, setState] = useState({
+    apiVersion: null,
+    version: packageInfo.version,
+    minApiVersion: "3.0.0",
+    contexts: {},
+    supported: false,
+    notFound: true,
+  });
+
+  const onChange = (type, name, key, value) => {
+    if (type === "context") {
+      setState((prevState) => ({
+        ...prevState,
+        contexts: {
+          ...prevState.contexts,
+          [name]: { ...prevState.contexts[name], [key]: value },
+        },
+      }));
+    }
+  };
+
+  const onConnectionChange = async (host, port) => {
+    api.host = host;
+    api.port = port;
+
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set("host", host);
+    currentUrl.searchParams.set("port", port);
+    window.history.pushState({}, "", currentUrl.href);
+
+    try {
+      await getMeta();
+      await getContexts();
+    } catch (err) {
+      console.log(err);
+      setState((prevState) => ({
+        ...prevState,
+        apiVersion: null,
+        contexts: {},
+        supported: false,
+      }));
+    }
+  };
+
+  const onSave = async (type, name) => {
+    if (type === "context") {
+      await api.setContext(name, state.contexts[name]);
+    }
+    page.reload();
+  };
+
+  const getMeta = async () => {
+    const { version, enabled } = await api.getMeta();
+
+    const min = state.minApiVersion.replace(/-[(beta)(alpha)].*/, "");
+    let curr = version;
+
+    if (version) {
+      curr = version.replace(/-[(beta)(alpha)].*/, "");
     }
 
-    onChange(type, name, key, value) {
-        if (type === 'context') {
-            this.setState({
-                contexts: {
-                    ...this.state.contexts,
-                    [name]: { ...this.state.contexts[name], [key]: value },
-                },
-            });
-        }
+    const supported = compareVersions(curr, min) > -1;
+
+    setState((prevState) => ({
+      ...prevState,
+      enabled,
+      apiVersion: curr,
+      supported,
+      notFound: !Boolean(version),
+    }));
+  };
+
+  const getContexts = async () => {
+    if (state.apiVersion) {
+      let contexts = {};
+      for (const context of await api.getContexts()) {
+        contexts[context.name] = context.context;
+      }
+
+      setState((prevState) => ({
+        ...prevState,
+        contexts,
+      }));
     }
+  };
 
-    async onConnectionChange(host, port) {
-        this.api.host = host;
-        this.api.port = port;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await getMeta();
+        await getContexts();
+      } catch (err) {
+        console.log(err);
+        setState((prevState) => ({
+          ...prevState,
+          apiVersion: null,
+          contexts: {},
+          supported: false,
+        }));
+      }
+    };
 
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set('host', host);
-        currentUrl.searchParams.set('port', port);
-        window.history.pushState({}, '', currentUrl.href);
+    fetchData();
 
-        try {
-            await this.getMeta();
-            await this.getContexts();
-        } catch (err) {
-            console.log(err);
-            this.setState({
-                apiVersion: null,
-                contexts: {},
-                supported: false,
-            });
-        }
-    }
+    page.onChange(() => {
+      fetchData();
+    });
+  }, []);
 
-    async onSave(type, name) {
-        if (type === 'context') {
-            await this.api.setContext(name, this.state.contexts[name]);
-        }
-        this.page.reload();
-    }
-
-    async componentDidMount() {
-        try {
-            await this.getMeta();
-            await this.getContexts();
-        } catch (err) {
-            console.log(err);
-        }
-
-        this.page.onChange(async () => {
-            try {
-                await this.getMeta();
-                await this.getContexts();
-            } catch (err) {
-                console.log(err);
-                this.setState({
-                    apiVersion: null,
-                    contexts: {},
-                    supported: false,
-                });
-            }
-        });
-    }
-
-    async getMeta() {
-        const { version, enabled } = await this.api.getMeta();
-
-        const min = this.state.minApiVersion.replace(/-[(beta)(alpha)].*/, '');
-        let curr = version;
-
-        if (version) {
-            curr = version.replace(/-[(beta)(alpha)].*/, '');
-        }
-
-        const supported = compareVersions(curr, min) > -1;
-
-        this.setState({
-            enabled,
-            apiVersion: curr,
-            supported,
-            notFound: !Boolean(version),
-        });
-    }
-
-    async getContexts() {
-        if (this.state.apiVersion) {
-            let contexts = {};
-            for (const context of await this.api.getContexts()) {
-                contexts[context.name] = context.context;
-            }
-
-            this.setState({
-                contexts,
-            });
-        }
-    }
-
-    render() {
-        let container = '';
-        if (this.state.supported) {
-            container = (
-                <Container
-                    data={this.state.contexts}
-                    onChange={this.onChange}
-                    onSave={this.onSave}
-                />
-            );
-        }
-
-        return (
-            <div className="App">
-                <div className="card">
-                    <div className="card-header row">
-                        <div className="col-sm-auto">
-                            <Status
-                                supported={this.state.supported}
-                                notFound={this.state.notFound}
-                                clientVersion={this.state.version}
-                                apiVersion={this.state.apiVersion}
-                                apiMinVersion={this.state.minApiVersion}
-                                apiMaxVersion={this.state.maxApiVersion}
-                            />
-                            <Connection
-                                host={this.api.host}
-                                port={this.api.port}
-                                onChange={this.onConnectionChange}
-                            />
-                        </div>
-                    </div>
-                </div>
-                {container}
-            </div>
-        );
-    }
-}
+  return (
+    <div className="App">
+      <div className="card">
+        <div className="card-header row">
+          <div className="col-sm-auto">
+            <Status
+              supported={state.supported}
+              notFound={state.notFound}
+              clientVersion={state.version}
+              apiVersion={state.apiVersion}
+              apiMinVersion={state.minApiVersion}
+              apiMaxVersion={state.maxApiVersion}
+            />
+            <Connection
+              host={api.host}
+              port={api.port}
+              onChange={onConnectionChange}
+            />
+          </div>
+        </div>
+      </div>
+      {state.supported && (
+        <Container data={state.contexts} onChange={onChange} onSave={onSave} />
+      )}
+    </div>
+  );
+};
 
 export default App;
