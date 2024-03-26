@@ -8,6 +8,7 @@ const podlet = new Podlet({
     name: 'myPodlet',
     version: '1.0.0',
     defaults: true,
+    pathname: '/',
 });
 
 podlet.defaults({
