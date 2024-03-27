@@ -1,2 +1,2 @@
 const useBroswer = chrome || browser;
-useBroswer.devtools.panels.create("Podium", "img/icon.png", "index.html");
+useBroswer.devtools.panels.create("Podium", "icon.png", "index.html");
