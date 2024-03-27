@@ -17,7 +17,7 @@ If you're new to extension development, a great place to start is Mozilla's [Web
 To build the extension:
 
 ```
-npm install
+npm install --legacy-peer-deps
 npm run build
 ```
 
