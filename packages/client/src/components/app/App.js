@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Status from "./status/Status";
 import Container from "./container/Container";
@@ -8,10 +8,10 @@ import Api from "../../services/api";
 import Page from "../../services/page";
 import { compareVersions } from "compare-versions";
 
-const App = () => {
-  const api = new Api();
-  const page = new Page();
+const api = new Api();
+const page = new Page();
 
+const App = () => {
   const [state, setState] = useState({
     apiVersion: null,
     version: packageInfo.version,
@@ -63,7 +63,7 @@ const App = () => {
     page.reload();
   };
 
-  const getMeta = async () => {
+  const getMeta = useCallback(async () => {
     const { version, enabled } = await api.getMeta();
 
     const min = state.minApiVersion.replace(/-[(beta)(alpha)].*/, "");
@@ -82,9 +82,9 @@ const App = () => {
       supported,
       notFound: !Boolean(version),
     }));
-  };
+  }, [state.minApiVersion]);
 
-  const getContexts = async () => {
+  const getContexts = useCallback(async () => {
     if (state.apiVersion) {
       let contexts = {};
       for (const context of await api.getContexts()) {
@@ -96,7 +96,7 @@ const App = () => {
         contexts,
       }));
     }
-  };
+  }, [state.apiVersion]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,7 +119,7 @@ const App = () => {
     page.onChange(() => {
       fetchData();
     });
-  }, []);
+  }, [getContexts, getMeta]);
 
   return (
     <div className="App">
