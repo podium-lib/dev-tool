@@ -33,11 +33,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
       - name: Run all tests
         run: npm test
 
       - name: Generate and check types
         run: npm run types
-
-      - name: Lint
-        run: npm run lint
