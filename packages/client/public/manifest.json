@@ -9,8 +9,5 @@
 	},
 	"version": "0.2.1",
 	"description": "Helps helps you test and debug your Podium applications",
-	"devtools_page": "extension.html",
-	"content_security_policy": {
-		"devtools_page": "script-src 'self'; object-src 'self';"
-	}
+	"devtools_page": "extension.html"
 }
