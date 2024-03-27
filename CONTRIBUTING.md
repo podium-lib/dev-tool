@@ -41,6 +41,7 @@ Some example commits and their release type:
 ### Working with next releases
 
 When making larger changes that needs thorough testing or modules widely used, you can create a `next` release. Here is how:
+
 1. Create a branch `next` if one does not exist
 2. Make changes (or push whatever changes you have on a different branch onto `next`)
 3. When you are done, commit your changes with semantic-release in mind
@@ -48,6 +49,7 @@ When making larger changes that needs thorough testing or modules widely used, y
 Where `next version` is incremented each time you push a feat, fix or patch to the branch.
 
 ### GitHub Actions
+
 GitHub Actions workflows:
 
 - [Build and test pull requests](./.github/workflows/test.yml)

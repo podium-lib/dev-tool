@@ -4,19 +4,21 @@
   "private": true,
   "homepage": "https://podium-lib.io/",
   "dependencies": {
-    "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^13.5.0",
-    "classnames": "^2.5.1",
-    "compare-versions": "^6.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "classnames": "2.5.1",
+    "compare-versions": "6.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.0.0",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/user-event": "13.5.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+		"web-ext": "7.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
+    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build && cd build && web-ext build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
