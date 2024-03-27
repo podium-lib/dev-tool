@@ -21,16 +21,26 @@ npm install --legacy-peer-deps
 npm run build
 ```
 
-The extension assets are generated to the `build/` directory, and the packaged extension to `dist/`.
+The extension JavaScript bundle is generated to the `public/` directory, and the packaged extension to `dist/`.
 
 ## Testing
+
+We use [`web-ext`](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) to get a quick and simple development environment in Firefox.
+
+1. Install Firefox if you haven't
+2. Run `npm install --legacy-peer-deps`
+3. Run `npm start`
+
+Firefox will open automatically. You should see two windows: one browser window, and a floating window of devtools. The devtools window is inspecting the extension, and starts empty. In the browser window, go to a test application (for instance start [server/example](../server/example/)) and open the devtools to reveal the Podium panel.
+
+### Manual testing
 
 The process is similar across browsers. Also note that some changes may require a reinstall or a refresh inside the browser settings.
 
 - [Chrome: Reload the extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#reload)
 - [Firefox: Testing](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#testing)
 
-### Firefox
+#### Firefox
 
 - Open [about:debugging](about:debugging#/runtime/this-firefox) and click This Firefox
 - Click Load Temporary Add-on
@@ -38,7 +48,7 @@ The process is similar across browsers. Also note that some changes may require 
 
 You'll have to [repeat the steps](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing) the next time you start Firefox, and hit the refresh button when you rebuild the extension.
 
-### Chrome
+#### Chrome
 
 The approach should be similar in Chromium-based browsers.
 
