@@ -1,8 +1,10 @@
 {
-    "name": "Podium development extension",
-    "version": "0.2.0",
-    "description": "Helps develop Podium apps.",
-    "devtools_page": "extension.html",
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "manifest_version": 2
+  "manifest_version": 3,
+  "name": "Podium development extension",
+  "version": "0.2.0",
+  "description": "Helps develop Podium apps.",
+  "devtools_page": "extension.html",
+  "content_security_policy": {
+    "devtools_page": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+  }
 }
