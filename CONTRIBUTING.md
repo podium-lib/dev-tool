@@ -11,12 +11,12 @@ This module is an `npm` [workspace]. You will need:
 
 All commands are run from the root of the project, from a terminal:
 
-| Command            | Action                                                                          |
-| ------------------ | ------------------------------------------------------------------------------- |
-| `npm install`      | Installs dependencies across the workspace                                      |
-| `npm test`         | Runs unit tests across the workspace                                            |
-| `npm run lint`     | Does a check with [ESLint](./.eslintrc) across the workspace                    |
-| `npm run types`    | Generates type definitions from JSDoc and does a typecheck across the workspace |
+| Command                          | Action                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------- |
+| `npm install --legacy-peer-deps` | Installs dependencies across the workspace                                      |
+| `npm test`                       | Runs unit tests across the workspace                                            |
+| `npm run lint`                   | Does a check with [ESLint](./.eslintrc) across the workspace                    |
+| `npm run types`                  | Generates type definitions from JSDoc and does a typecheck across the workspace |
 
 To only run the command for an individual package, either:
 
