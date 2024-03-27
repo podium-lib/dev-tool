@@ -1,42 +1,44 @@
 {
-  "name": "podium-dev-tools",
-  "version": "0.2.1",
-  "private": true,
-  "homepage": "https://podium-lib.io/",
-  "dependencies": {
-    "classnames": "2.5.1",
-    "compare-versions": "6.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "6.0.0",
-    "@testing-library/react": "14.0.0",
-    "@testing-library/user-event": "13.5.0",
-    "react-scripts": "5.0.1",
+	"name": "podium-dev-tools",
+	"version": "0.2.1",
+	"private": true,
+	"homepage": "https://podium-lib.io/",
+	"dependencies": {
+		"classnames": "2.5.1",
+		"compare-versions": "6.1.0",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "6.0.0",
+		"@testing-library/react": "14.0.0",
+		"@testing-library/user-event": "13.5.0",
+		"npm-run-all": "4.1.5",
+		"react-scripts": "5.0.1",
 		"web-ext": "7.11.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build && cd build && web-ext build",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"watch:react": "react-scripts start",
+		"build": "INLINE_RUNTIME_CHUNK=false react-scripts build && web-ext build --source-dir build --artifacts-dir dist --overwrite-dest",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }

@@ -4,7 +4,9 @@ Thank you for showing an interest in contributing 💜
 
 The goal of this browser extension is to help developers of [Podium applications](https://podium-lib.io/) test and debug their apps.
 
-The extension targets [WebExtension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions) Manifest V3 for [cross-browser support](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension). Some documentation for extension authors that may be helpful:
+The extension targets [WebExtension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions) Manifest V3 for [cross-browser support](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension).
+
+If you're new to extension development, a great place to start is Mozilla's [WebExtension workshop](https://extensionworkshop.com/). Some other documentation for extension authors that may be helpful:
 
 - [MDN - Build a cross-browser extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension)
 - [Chrome - Your first extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world)
@@ -19,7 +21,7 @@ npm install
 npm run build
 ```
 
-The built extension is generated to the `build/` directory.
+The extension assets are generated to the `build/` directory, and the packaged extension to `dist/`.
 
 ## Testing
 
