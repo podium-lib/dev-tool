@@ -11,6 +11,7 @@ If you're new to extension development, a great place to start is Mozilla's [Web
 - [MDN - Build a cross-browser extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension)
 - [Chrome - Your first extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world)
 - [MDN - Your first extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension)
+- [Chrome - Extend DevTools](https://developer.chrome.com/docs/extensions/how-to/devtools/extend-devtools)
 
 ## Building
 

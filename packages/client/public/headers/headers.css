@@ -1,0 +1,29 @@
+.headers-form {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+.headers-form-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.header-form-input-pair {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.header-form-input-pair .input[name$="-key"] {
+	width: 28ch;
+}
+
+.headers-form-buttons {
+	align-self: flex-end;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
