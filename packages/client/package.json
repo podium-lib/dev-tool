@@ -9,8 +9,10 @@
 		"build:js": "rollup --config rollup.config.js",
 		"build:web-ext": "web-ext build --source-dir public --artifacts-dir dist --overwrite-dest",
 		"start": "npm-run-all --parallel watch:js watch:web-ext",
+		"start:chrome": "npm-run-all --parallel watch:js watch:web-ext-chrome",
 		"watch:js": "rollup --config rollup.config.js --watch --watch.onEnd=\"web\"",
-		"watch:web-ext": "web-ext run --source-dir public --devtools"
+		"watch:web-ext": "web-ext run --source-dir public --devtools",
+		"watch:web-ext-chrome": "web-ext run --target chromium --source-dir public --devtools"
 	},
 	"dependencies": {
 		"classnames": "2.5.1",
@@ -19,7 +21,6 @@
 		"react-dom": "18.2.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.24.3",
 		"@babel/preset-react": "7.24.1",
 		"@rollup/plugin-babel": "6.0.4",
 		"@rollup/plugin-commonjs": "25.0.7",
