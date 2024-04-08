@@ -7,6 +7,8 @@ This module is an `npm` [workspace]. You will need:
 - Node latest LTS
 - `npm`
 
+See also [the browser extension's CONTRIBUTING.md](packages/client/CONTRIBUTING.md) since the workflow there is different.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
