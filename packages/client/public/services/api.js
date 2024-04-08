@@ -1,3 +1,13 @@
+/**
+ * @typedef {object} PodletContext
+ * @property {string} name
+ * @property {Context} context
+ */
+
+/**
+ * @typedef {Record<string, string>} Context
+ */
+
 export default class Api {
 	base = "http://localhost:8172/";
 
@@ -33,6 +43,9 @@ export default class Api {
 		}
 	}
 
+	/**
+	 * @returns {Promise<PodletContext[]>}
+	 */
 	async getContexts() {
 		try {
 			const data = await fetch(this.url("/context"));
@@ -66,6 +79,10 @@ export default class Api {
 		}
 	}
 
+	/**
+	 * @param {string} name
+	 * @param {Context} context
+	 */
 	async setContext(name, context) {
 		try {
 			const response = await fetch(this.url("/context/" + name), {

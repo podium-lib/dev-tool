@@ -3,18 +3,55 @@ import Api from "./services/api.js";
 const api = new Api();
 
 async function connect() {
-	const meta = await api.getMeta();
 	const contexts = await api.getContexts();
 
-	const pre = document.getElementById("log");
-	pre.textContent = JSON.stringify(
-		{
-			meta,
-			contexts,
-		},
-		null,
-		2,
-	);
+	const podlets = document.getElementById("podlets");
+	for (const podlet of contexts) {
+		const article = document.createElement("article");
+		podlets.appendChild(article);
+
+		const heading = document.createElement("h2");
+		heading.textContent = podlet.name;
+
+		article.appendChild(heading);
+
+		const form = document.createElement("form");
+		article.appendChild(form);
+
+		let i = 0;
+		for (const [name, value] of Object.entries(podlet.context)) {
+			const id = `${podlet.name}${i++}`;
+			const label = document.createElement("label");
+			label.htmlFor = id;
+			label.textContent = name;
+			form.appendChild(label);
+
+			const input = document.createElement("input");
+			input.id = id;
+			input.name = name;
+			input.value = value;
+			form.appendChild(input);
+		}
+
+		const submit = document.createElement("button");
+		submit.type = "submit";
+		submit.textContent = `Update ${podlet.name}`;
+		form.appendChild(submit);
+
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+			const name = podlet.name;
+			const context = /** @type {Record<string, string>} */ ({});
+			for (const input of Array.from(form.querySelectorAll("input"))) {
+				context[input.name] = input.value;
+			}
+			await api.setContext(name, context);
+		});
+	}
+
+	const meta = await api.getMeta();
+	const statusMeta = document.getElementById("status-meta");
+	statusMeta.textContent = `DevTools API version ${meta.version}`;
 }
 
 // Try to connect using defaults
