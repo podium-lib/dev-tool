@@ -6,6 +6,12 @@ async function connect() {
 	const contexts = await api.getContexts();
 
 	const podlets = document.getElementById("podlets");
+
+	// remove existing DOM
+	while (podlets.firstChild) {
+		podlets.removeChild(podlets.firstChild);
+	}
+
 	for (const podlet of contexts) {
 		const article = document.createElement("article");
 		podlets.appendChild(article);
