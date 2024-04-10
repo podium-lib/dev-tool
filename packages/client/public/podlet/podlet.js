@@ -26,17 +26,21 @@ async function connect() {
 
 		let i = 0;
 		for (const [name, value] of Object.entries(podlet.context)) {
+			const wrapperElement = document.createElement("div");
+
 			const id = `${podlet.name}${i++}`;
 			const label = document.createElement("label");
 			label.htmlFor = id;
 			label.textContent = name;
-			form.appendChild(label);
+			wrapperElement.appendChild(label);
 
 			const input = document.createElement("input");
 			input.id = id;
 			input.name = name;
 			input.value = value;
-			form.appendChild(input);
+			wrapperElement.appendChild(input);
+
+			form.appendChild(wrapperElement);
 		}
 
 		const submit = document.createElement("button");

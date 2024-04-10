@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Podium Developer Tools</title>
-		<link rel="stylesheet" href="./podlet.css" />
-	</head>
-	<body>
-		<main class="podium">
-			<div class="status">
-				<p id="status-message"></p>
-				<div id="status-meta"></div>
-			</div>
-			<form id="connection">
-				<label>
-					DevTools URL
-					<input type="text" name="apibase" value="http://localhost:8172/" />
-				</label>
-				<button type="submit">Connect</button>
-			</form>
-			<div id="podlets"></div>
-		</main>
-		<script src="./podlet.js" type="module"></script>
-	</body>
+<head>
+	<meta charset="utf-8" />
+	<title>Podium Developer Tools</title>
+	<link rel="stylesheet" href="./podlet.css" />
+</head>
+<body>
+<main class="podium">
+	<div class="status">
+		<p id="status-message"></p>
+		<div id="status-meta"></div>
+	</div>
+	<form id="connection">
+		<div>
+			<label>
+				DevTools URL
+				<input type="text" name="apibase" value="http://localhost:8172/" />
+			</label>
+			<button type="submit">Connect</button>
+		</div>
+	</form>
+	<div id="podlets"></div>
+</main>
+<script src="./podlet.js" type="module"></script>
+</body>
 </html>
