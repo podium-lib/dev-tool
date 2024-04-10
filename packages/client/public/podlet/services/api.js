@@ -52,6 +52,7 @@ export default class Api {
 			return await data.json();
 		} catch (err) {
 			console.error(`Unable to fetch devtool context data at ${this.url("/context")}`, err);
+			throw err;
 		}
 	}
 

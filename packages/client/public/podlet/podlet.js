@@ -3,9 +3,21 @@ import Api from "./services/api.js";
 const api = new Api();
 
 async function connect() {
-	const contexts = await api.getContexts();
+
+	let contexts;
+	try {
+		contexts = await api.getContexts();
+	} catch (err) {
+		const status = document.getElementById("status-meta");
+		status.textContent = `error occured while connecting: ${err.message}`;
+		return;
+	}
 
 	const podlets = document.getElementById("podlets");
+
+	document.getElementById("connection").style.display = "none";
+	document.getElementById("settings").style.display = "block";
+
 
 	// remove existing DOM
 	while (podlets.firstChild) {
@@ -61,7 +73,7 @@ async function connect() {
 
 	const meta = await api.getMeta();
 	const statusMeta = document.getElementById("status-meta");
-	statusMeta.textContent = `DevTools API version ${meta.version}`;
+	statusMeta.textContent = `Connected. ${contexts.length} podlets identified. DevTools API version ${meta.version}`;
 }
 
 // Try to connect using defaults
@@ -75,3 +87,4 @@ connection.addEventListener("submit", async (e) => {
 
 	await connect();
 });
+
