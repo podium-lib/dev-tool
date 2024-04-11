@@ -1,223 +1,159 @@
-html{
-	font-family: Helvetica Neue, Helvetica, Arial;
-	margin: 0;
-	background-color: #fff8e8;
+:root {
+	/* Base tokens, aka level one tokens */
+	--color-forest-green: #205a3b;
+	--color-moss-green: #5d826c;
+	--color-cream: #fff8e8;
+	--color-white: #fff;
+	--color-black: #000;
+	--color-grey: #2b2b2b;
+	--color-brown: #231d02;
+	--color-light-grey: lightgray;
+	--color-dark-yellow: #d7ae12;
+	--color-darker-yellow: #a3820f;
+
+	/* Level two tokens, aka semantic tokens */
+	--body-bg-color: var(--color-cream);
+	--border-color: var(--color-grey);
+	--text-color: var(--color-black);
+	--heading-color: var(--color-forest-green);
+	--heading-color-dark-bg: var(--color-white);
+
+	/* Level three tokens, aka component tokens */
+	--form-label-color: var(--color-grey);
+
+	--input-border: 1px solid var(--border-color);
+
+	--button-primary-color: var(--color-brown);
+	--button-primary-bg-color: var(--color-dark-yellow);
+	--button-primary-bg-color-hover: var(--color-darker-yellow);
+
+	--card-bg-color: var(--color-white);
+	--card-heading-color: var(--color-white);
+	--card-heading-bg-color: var(--color-moss-green);
 }
 
-.podium{
+html {
+	font-family:
+		Helvetica Neue,
+		Helvetica,
+		Arial;
+	margin: 0;
+	background-color: var(--body-bg-color);
+}
+
+.input-group {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.input-label {
+	font-weight: 500;
+	margin-bottom: 5px;
+	color: var(--form-label-color);
+}
+
+.input {
+	border-radius: 5px;
+	border: var(--input-border);
+	padding: 10px;
+}
+
+.button-primary {
+	background-color: var(--button-primary-bg-color);
+	color: var(--button-primary-color);
+	align-self: end;
+	padding: 10px 15px;
+	font-size: 16px;
+	border: none;
+	font-weight: bold;
+	border-radius: 4px;
+
+	&:hover {
+		background-color: var(--button-primary-bg-color-hover);
+		cursor: pointer;
+	}
+}
+
+.podium {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
-	margin:10px;
-
-	h1{
-		color: #205a3b;
-	}
-
-	.status{
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		margin-top:-10px;
-		margin-bottom:20px;
-		font-size: 12px;
-
-		p{
-			font-weight: 600;
-		}
-	}
+	margin: 10px;
 }
 
-.topbar{
-	justify-content: space-between;
+.title {
+	color: var(--heading-color);
+}
+
+.status {
 	display: flex;
-	background-color: white;
-	flex-direction: column;
-	padding:20px 40px 20px 40px;
-	border-radius: 20px;
-
-	h2{
-		margin:0;
-	}
-
-	.actions{
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-
-		@media (max-width: 600px) {
-			flex-direction: column;
-			justify-content: center;
-		}
-	}
+	flex-direction: row;
+	align-items: center;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	font-size: 12px;
 }
 
-
-#settings{
-	margin:0;
-	display: none;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-
-	div{
-		padding:15px 0 15px 0;
-		flex-direction: row;
-		text-align: left;
-		display: flex;
-
-		label{
-			font-weight: 500;
-			margin:5px;
-			display: flex;
-			flex-direction: column;
-			color: #2B2B2B
-		}
-
-		select, input{
-			border-radius: 5px;
-			border: 1px solid lightgray;
-			padding:10px;
-		}
-		input{
-			width:80px;
-		}
-	}
-
-	button{
-		background-color: #d7ae12;
-		color: #231d02;
-		align-self: center;
-		height:38px;
-		padding:5px 15px 5px 15px;
-		font-size: 16px;
-		border: none;
-		margin-left:10px;
-		font-weight: bold;
-		border-radius: 4px;
-		justify-self: center;
-	}
-	button:hover{
-		background-color: #a3820f;
-		cursor: pointer;
-	}
+.status__label {
+	font-weight: 600;
 }
 
-
-#connection{
-	form{
-		display:flex;
-		flex-direction: row;
-	}
-
-	div{
-		font-weight: 500;
-		margin-bottom: 5px;
-		color: #2B2B2B;
-		display: flex;
-		width:250px;
-		flex-direction: row;
-	}
-
-	input{
-		border-radius: 5px;
-		border: 1px solid lightgray;
-		padding:10px;
-	}
-	button{
-		background-color: #d7ae12;
-		color: #231d02;
-		align-self: end;
-		height:38px;
-		padding:5px 10px 5px 10px;
-		font-size: 16px;
-		border: none;
-		margin-left:10px;
-		font-weight: bold;
-		border-radius: 4px;
-		justify-self: center;
-	}
-	button:hover{
-		background-color: #a3820f;
-		cursor: pointer;
-	}
+.connection-form {
+	font-weight: 500;
+	margin-bottom: 5px;
+	color: var(--text-color);
+	display: flex;
+	background-color: var(--card-bg-color);
+	flex-direction: row;
+	padding:15px;
+	border-radius: 10px;
 }
 
-#podlets{
+.connection-form__submit-button {
+	margin-left: 10px;
+}
+
+.podlets-container {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row;
-	gap:10px;
+	gap: 10px;
 
+	/* Might need container query here since we're in devtools */
 	@media (max-width: 768px) {
 		flex-direction: column;
 	}
-
-	article{
-		max-width: 600px;
-		margin-top:30px;
-		background-color: white;
-		border-radius: 10px;
-
-		h2{
-			padding:13px;
-			margin:0;
-			text-align: center;
-			background-color: #5d826c;
-			overflow: hidden;
-			color:white;
-			border-radius: 10px 10px 0 0;
-		}
-	}
-
-
-	form{
-		margin:20px;
-		display:grid;
-		grid-template-columns: 1fr 1fr;
-		grid-column-gap: 30px;
-		grid-row-gap: 10px;
-
-		div{
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-
-			label{
-				font-weight: 500;
-				margin-bottom: 5px;
-				color: #2B2B2B
-			}
-
-			input{
-				border-radius: 5px;
-				border: 1px solid lightgray;
-				padding:10px;
-
-			}
-
-		}
-
-		button{
-			background-color: #d7ae12;
-			color: #231d02;
-			padding:15px 20px 15px 20px;
-			font-size: 16px;
-			border: none;
-			font-weight: bold;
-			border-radius: 10px;
-			grid-column: 1 / -1;
-			margin-top:20px;
-			justify-self: center;
-
-		}
-		button:hover{
-			background-color: #a3820f;
-			cursor: pointer;
-		}
-	}
 }
 
+.podlet-card {
+	max-width: 600px;
+	margin-top: 30px;
+	background-color: var(--card-bg-color);
+	border-radius: 10px;
+}
 
+.podlet-card-heading {
+	padding: 13px;
+	margin: 0;
+	text-align: center;
+	background-color: var(--card-heading-bg-color);
+	overflow: hidden;
+	color: var(--card-heading-color);
+	border-radius: 10px 10px 0 0;
+}
+
+.podlet-context-form {
+	margin: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 30px;
+	grid-row-gap: 10px;
+}
+
+.podlet-context-form-submit {
+	grid-column: 1 / -1;
+	margin-top: 20px;
+	justify-self: center;
+}

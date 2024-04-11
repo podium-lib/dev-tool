@@ -1,54 +1,32 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<title>Podium Developer Tools</title>
-	<link rel="stylesheet" href="./podlet.css" />
-</head>
-<body>
-<main class="podium">
-	<h1>Podium developer tools</h1>
-	<div class="status">
-		<p>Status:&nbsp;</p>
-		<p id="status-message"></p>
-		<div id="status-meta">Not connected</div>
-	</div>
-	<div class="topbar">
-		<div class="actions">
-				<form id="connection">
-					<div>
-						<label>
-							DevTools URL
-							<input type="text" name="apibase" value="http://localhost:8172/" />
-						</label>
-						<button type="submit">Connect</button>
-					</div>
-				</form>
-			<form id="settings">
-				<h2>Settings</h2>
-				<div>
-					<label>
-						Device type
-						<select name="deviceType" id="deviceType">
-							<option value="desktop">desktop
-							</option>
-							<option value="ios">ios
-							</option>
-							<option value="android">android
-							</option>
-						</select>
+	<head>
+		<meta charset="utf-8" />
+		<title>Podium Developer Tools</title>
+		<link rel="stylesheet" href="./podlet.css" />
+	</head>
+	<body>
+		<main class="podium">
+			<h1 class="title">Podium developer tools</h1>
+
+			<div class="status">
+				<p class="status__label">Status:&nbsp;</p>
+				<div id="status-meta">Not connected</div>
+			</div>
+
+			<form class="connection-form" id="connection">
+				<div class="input-group">
+					<label for="apibase" class="input-label">
+						DevTools URL
 					</label>
-					<label>
-						Base font in px
-						<input type="number" name="baseFont" value="16" />
-					</label>
+					<input class="input" type="text" id="apibase" name="apibase" value="http://localhost:8172/" />
 				</div>
-					<button type="submit">Save</button>
+					<button class="button-primary connection-form__submit-button" type="submit">Connect</button>
+
 			</form>
-		</div>
-	</div>
-	<div id="podlets"></div>
-</main>
-<script src="./podlet.js" type="module"></script>
-</body>
+
+			<div id="podlets" class="podlets-container"></div>
+		</main>
+		<script src="./podlet.js" type="module"></script>
+	</body>
 </html>
