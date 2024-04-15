@@ -8,7 +8,7 @@
 			{
 				"channel": "listed",
 				"extensionId": "podium-dev-tool@podium-lib.io",
-				"sourceDir": "public",
+				"sourceDir": "packages/client/public",
 				"targetXpi": "podium_developer_tools.xpi"
 			}
 		],
