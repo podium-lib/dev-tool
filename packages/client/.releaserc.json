@@ -4,7 +4,7 @@
 		"@semantic-release/release-notes-generator",
 		"@semantic-release/changelog",
 		[
-			"semantic-release-firefox",
+			"semantic-release-firefox-add-on",
 			{
 				"channel": "listed",
 				"extensionId": "podium-dev-tool@podium-lib.io",
