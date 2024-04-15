@@ -39,9 +39,14 @@ backgroundPageConnection.onMessage.addListener((message) => {
 	}
 });
 
+// TODO: dropdown with presets that calls addHeaderInput with stuff?
+
 function addHeaderInput(header = "", value = "") {
 	const inputs = document.getElementById("inputs");
 	let inputCount = Array.from(inputs.querySelectorAll("input")).length;
+
+	const baseId = `header-${inputCount++}`;
+	// TODO: add active checkbox
 
 	const inputPair = document.createElement("div");
 	inputPair.className = "header-form-input-pair";
@@ -49,7 +54,7 @@ function addHeaderInput(header = "", value = "") {
 	const keyInputGroup = document.createElement("div");
 	keyInputGroup.className = "input-group";
 
-	const keyInputId = `header-${inputCount++}`;
+	const keyInputId = `${baseId}-key-label`;
 	const keyLabel = document.createElement("label");
 	keyLabel.className = "input-label";
 	keyLabel.htmlFor = keyInputId;
@@ -82,6 +87,8 @@ function addHeaderInput(header = "", value = "") {
 	valueInputGroup.appendChild(valueInput);
 	inputPair.appendChild(valueInputGroup);
 
+	// TODO: add delete button that removes this inputPair
+
 	inputs.appendChild(inputPair);
 }
 
@@ -96,6 +103,8 @@ function buildHeadersForm(requestHeaders) {
 
 		// Read the inputs from the headers form
 		const newHeaders = [];
+
+		// TODO: filter to only inlcude active checked
 		const keyValueInputs = Array.from(headers.querySelectorAll("input"));
 		const keyValuePairs = [];
 		for (let i = 0; i < keyValueInputs.length; i += 2) {
