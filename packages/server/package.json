@@ -29,7 +29,7 @@
 	},
 	"author": "Richard Walker <richard.walker@schibsted.com>",
 	"devDependencies": {
-		"@types/node": "20.11.30",
+		"@types/node": "20.12.7",
 		"@podium/podlet": "5.1.1",
 		"@podium/proxy": "5.0.8",
 		"supertest": "6.3.4"
