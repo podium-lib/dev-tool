@@ -25,13 +25,17 @@ The extension JavaScript bundle is generated to the `public/` directory, and the
 
 ## Testing
 
-We use [`web-ext`](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) to get a quick and simple development environment in Firefox.
+We use [`web-ext`](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) to get a quick and simple development environment in Chrome and Firefox.
 
-1. Install Firefox if you haven't
-2. Run `npm install --legacy-peer-deps`
-3. Run `npm start`
+1. Run `npm install --legacy-peer-deps`
+2. Run `npm start`
 
-Firefox will open automatically. You should see two windows: one browser window, and a floating window of devtools. The devtools window is inspecting the extension, and starts empty. In the browser window, go to a test application (for instance start [server/example](../server/example/)) and open the devtools to reveal the Podium panel.
+Chrome will open automatically.
+
+- In the browser window, go to a test application (for instance start [server/example](../server/example/)) and open the devtools to reveal the Podium panel.
+- Right click inside the panel and Inspect to open the "devtools for the devtool".
+
+To test in Firefox, run `npm run start:firefox`.
 
 ### Manual testing
 

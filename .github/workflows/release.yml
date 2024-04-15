@@ -50,5 +50,7 @@ jobs:
       - name: Release and publish
         run: npx multi-semantic-release
         env:
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_SECRET_KEY: ${{ secrets.FIREFOX_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

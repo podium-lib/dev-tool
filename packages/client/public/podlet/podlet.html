@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Podium Developer Tools</title>
+		<link rel="stylesheet" href="./podlet.css" />
+	</head>
+	<body>
+		<main class="podium">
+			<h1 class="title">Podium developer tools</h1>
+
+			<div class="status">
+				<p class="status__label">Status:&nbsp;</p>
+				<div id="status-meta">Not connected</div>
+			</div>
+
+			<form class="connection-form" id="connection">
+				<div class="input-group">
+					<label for="apibase" class="input-label">
+						DevTools URL
+					</label>
+					<input class="input" type="text" id="apibase" name="apibase" value="http://localhost:8172/" />
+				</div>
+					<button class="button-primary connection-form__submit-button" type="submit">Connect</button>
+
+			</form>
+
+			<div id="podlets" class="podlets-container"></div>
+		</main>
+		<script src="./podlet.js" type="module"></script>
+	</body>
+</html>

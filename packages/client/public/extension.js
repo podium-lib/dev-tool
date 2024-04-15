@@ -1,2 +1,2 @@
-const useBroswer = chrome || browser;
-useBroswer.devtools.panels.create("Podium", "icon.png", "index.html");
+const agent = chrome || browser;
+agent.devtools.panels.create("Podium", "icon.png", "/podlet/podlet.html");
