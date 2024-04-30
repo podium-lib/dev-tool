@@ -1,6 +1,6 @@
 {
 	"name": "@podium/dev-tool",
-	"version": "5.0.5",
+	"version": "5.0.6",
 	"type": "module",
 	"description": "Development tool to improve the experience of working on Podium podlets",
 	"license": "MIT",

@@ -1,3 +1,10 @@
+## @podium/dev-tool [5.0.6](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.5...@podium/dev-tool@5.0.6) (2024-04-30)
+
+
+### Bug Fixes
+
+* **deps:** update podium packages ([b529516](https://github.com/podium-lib/dev-tool/commit/b529516816bed734706dbae28b4d754da529e551))
+
 ## @podium/dev-tool [5.0.5](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.4...@podium/dev-tool@5.0.5) (2024-04-29)
 
 
