@@ -63,11 +63,11 @@ function addHeaderInput(header = "", value = "", enabled = true, index) {
 }
 
 function refreshHeaderIndexes(){
-	const inputs = document.getElementById("inputs");
+	const inputsContainer = document.getElementById("inputs");
 	const isEven = i => i % 2 === 0;
 
-	for(let inputGroupIndex in Array.from(inputs.children)){
-		const inputGroup = inputs.children[inputGroupIndex]
+	for(let inputGroupIndex in Array.from(inputsContainer.children)){
+		const inputGroup = inputsContainer.children[inputGroupIndex]
 		if(isEven(inputGroupIndex)){
 			// @ts-ignore
 			inputGroup.container.classList.remove("container-odd");
@@ -99,16 +99,25 @@ function buildHeadersForm(requestHeaders) {
 		const newHeaders = [];
 
 		// TODO: filter to only inlcude active checked
-		const keyValueInputs = Array.from(headers.querySelectorAll("input"));
-		const keyValuePairs = [];
-		for (let i = 0; i < keyValueInputs.length; i += 2) {
-			const key = keyValueInputs[i];
-			const value = keyValueInputs[i + 1];
+		const inputsContainer = document.getElementById("inputs");
 
-			if (key && value) {
-				keyValuePairs.push([key.value, value.value]);
+		const inputGroups = Array.from(inputsContainer.children);
+		const keyValuePairs = [];
+		for (let inputGroup of inputGroups) {
+			// @ts-ignore
+			const inputs = inputGroup.container.getElementsByTagName("input");
+			const checkboxInput = inputs[0].checked;
+			const headerInput = inputs[1].value;
+			const valueInput = inputs[2].value;
+			console.log(checkboxInput, headerInput, valueInput)
+
+			if (checkboxInput && headerInput && valueInput) {
+				keyValuePairs.push([headerInput, valueInput]);
 			}
 		}
+
+
+		console.log(keyValuePairs)
 		for (const [header, value] of keyValuePairs) {
 			newHeaders.push({
 				header,
