@@ -1,4 +1,4 @@
-import {eventNames } from "../components/header-input-group.js";
+import { eventNames } from "../components/header-input-group.js";
 
 const agent = typeof globalThis.browser !== "undefined" ? globalThis.browser : globalThis.chrome;
 
@@ -12,7 +12,7 @@ backgroundPageConnection.postMessage({
 });
 
 // Listen to messages coming from scripts injected into the page
-window.addEventListener("message", function (event) {
+window.addEventListener("message", function(event) {
 	// Only accept messages from the same frame
 	if (event.source !== window) {
 		return;
@@ -46,7 +46,7 @@ backgroundPageConnection.onMessage.addListener((message) => {
 function addHeaderInput(header = "", value = "", enabled = true, index) {
 	const inputs = document.getElementById("inputs");
 
-	const headerInputGroup = document.createElement('header-input-group');
+	const headerInputGroup = document.createElement("header-input-group");
 	// @ts-ignore
 	headerInputGroup.headerNameInput.value = header;
 	// @ts-ignore
@@ -54,7 +54,7 @@ function addHeaderInput(header = "", value = "", enabled = true, index) {
 	// @ts-ignore
 	headerInputGroup.enableCheckbox.checked = enabled;
 
-	if(index%2===0){
+	if (index % 2 === 0) {
 		// @ts-ignore
 		headerInputGroup.container.classList.add("container-even");
 	}
@@ -62,30 +62,29 @@ function addHeaderInput(header = "", value = "", enabled = true, index) {
 	inputs.appendChild(headerInputGroup);
 }
 
-function refreshHeaderIndexes(){
+function refreshHeaderIndexes() {
 	const inputsContainer = document.getElementById("inputs");
 	const isEven = i => i % 2 === 0;
 
-	for(let inputGroupIndex in Array.from(inputsContainer.children)){
-		const inputGroup = inputsContainer.children[inputGroupIndex]
-		if(isEven(inputGroupIndex)){
+	for (let inputGroupIndex in Array.from(inputsContainer.children)) {
+		const inputGroup = inputsContainer.children[inputGroupIndex];
+		if (isEven(inputGroupIndex)) {
 			// @ts-ignore
 			inputGroup.container.classList.remove("container-odd");
 			// @ts-ignore
 			inputGroup.container.classList.add("container-even");
-		}else{
+		} else {
 			// @ts-ignore
 			inputGroup.container.classList.remove("container-even");
 			// @ts-ignore
 			inputGroup.container.classList.add("container-odd");
 		}
 	}
-
 }
 
 
 function buildHeadersForm(requestHeaders) {
-	let index=0;
+	let index = 0;
 	for (const { header, value } of Object.values(requestHeaders)) {
 		addHeaderInput(header, value, true, index);
 		index++;
@@ -109,7 +108,6 @@ function buildHeadersForm(requestHeaders) {
 			const checkboxInput = inputs[0].checked;
 			const headerInput = inputs[1].value;
 			const valueInput = inputs[2].value;
-			console.log(checkboxInput, headerInput, valueInput)
 
 			if (checkboxInput && headerInput && valueInput) {
 				keyValuePairs.push([headerInput, valueInput]);
@@ -117,7 +115,6 @@ function buildHeadersForm(requestHeaders) {
 		}
 
 
-		console.log(keyValuePairs)
 		for (const [header, value] of keyValuePairs) {
 			newHeaders.push({
 				header,
@@ -144,4 +141,45 @@ window.addEventListener(eventNames.deleteHeader, (e) => {
 	setTimeout(() => {
 		refreshHeaderIndexes();
 	}, 0);
+});
+
+
+document.getElementById("preset-select").addEventListener("change", (e) => {
+	const presets = {
+		"mobile": {
+			"x-podium-app-id": "lib.podium.app@1.2.3",
+			"x-podium-base-font-size": "1rem",
+			"x-podium-device-type": "mobile",
+		},
+		"desktop": {
+			"x-podium-app-id": "lib.podium.app@1.2.3",
+			"x-podium-base-font-size": "1rem",
+			"x-podium-device-type": "desktop",
+		},
+	};
+
+	// @ts-ignore
+	const preset = presets[e.target.value];
+
+	const inputsContainer = document.getElementById("inputs");
+	const inputGroups = Array.from(inputsContainer.children);
+	let missingHeaders = preset;
+	for (let inputGroup of inputGroups) {
+		// @ts-ignore
+		const inputs = inputGroup.container.getElementsByTagName("input");
+		const headerInput = inputs[1];
+		const valueInput = inputs[2];
+
+		if (preset[headerInput.value]) {
+			valueInput.value = preset[headerInput.value];
+			delete missingHeaders[headerInput.value];
+		}
+	}
+
+	for (const [header, value] of Object.entries(missingHeaders)) {
+		addHeaderInput(header, value, true, inputGroups.length);
+	}
+
+	e.target.value="";
+
 });

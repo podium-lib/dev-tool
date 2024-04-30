@@ -107,7 +107,6 @@ html {
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	padding: var(--margin-medium);
 	margin: var(--margin-small);
 }
 

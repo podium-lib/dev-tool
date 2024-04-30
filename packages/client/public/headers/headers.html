@@ -1,30 +1,41 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Podium Layout Developer Tools</title>
-		<link rel="stylesheet" href="../devtools.css" />
-		<link rel="stylesheet" href="./headers.css" />
-	</head>
-	<body>
-		<main class="podium">
-			<form id="headers" class="headers-form">
-				<div class="headers-form-inputs">
-					<div class="inputs-title">
-						<p>Enabled</p>
-						<p>Name</p>
-						<p>Value</p>
-					</div>
-					<div id="inputs" class="inputs-list">
-
-					</div>
+<head>
+	<meta charset="utf-8" />
+	<title>Podium Layout Developer Tools</title>
+	<link rel="stylesheet" href="../devtools.css" />
+	<link rel="stylesheet" href="./headers.css" />
+</head>
+<body>
+<main class="podium">
+	<form id="headers" class="headers-form">
+		<div class="headers-form-inputs">
+			<div class="inputs-title">
+				<p>Enabled</p>
+				<p>Name</p>
+				<p>Value</p>
+			</div>
+			<div id="inputs" class="inputs-list">
+			</div>
+		</div>
+		<div class="headers-form-buttons">
+			<div class="preset-container">
+				<div class="preset-group">
+					<label class="preset-label" for="preset-select">Select preset</label>
+					<select class="preset-select" id="preset-select">
+						<option value="">---</option>
+						<option value="desktop">Desktop</option>
+						<option value="mobile">Mobile</option>
+					</select>
 				</div>
-				<div class="headers-form-buttons">
-					<button id="add-header" class="button-secondary" type="button">Add header</button>
-					<button class="button-primary" type="submit">Save and reload</button>
-				</div>
-			</form>
-		</main>
-		<script src="./headers.js" type="module"></script>
-	</body>
+			</div>
+			<div class="form-controls">
+				<button id="add-header" class="button-secondary" type="button">Add header</button>
+				<button class="button-primary" type="submit">Save and reload</button>
+			</div>
+		</div>
+	</form>
+</main>
+<script src="./headers.js" type="module"></script>
+</body>
 </html>
