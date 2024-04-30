@@ -1,3 +1,5 @@
+import {eventNames } from "../components/header-input-group.js";
+
 const agent = typeof globalThis.browser !== "undefined" ? globalThis.browser : globalThis.chrome;
 
 const backgroundPageConnection = agent.runtime.connect({
@@ -41,60 +43,52 @@ backgroundPageConnection.onMessage.addListener((message) => {
 
 // TODO: dropdown with presets that calls addHeaderInput with stuff?
 
-function addHeaderInput(header = "", value = "") {
+function addHeaderInput(header = "", value = "", enabled = true, index) {
 	const inputs = document.getElementById("inputs");
-	let inputCount = Array.from(inputs.querySelectorAll("input")).length;
 
-	const baseId = `header-${inputCount++}`;
-	// TODO: add active checkbox
+	const headerInputGroup = document.createElement('header-input-group');
+	// @ts-ignore
+	headerInputGroup.headerNameInput.value = header;
+	// @ts-ignore
+	headerInputGroup.headerValueInput.value = value;
+	// @ts-ignore
+	headerInputGroup.enableCheckbox.checked = enabled;
 
-	const inputPair = document.createElement("div");
-	inputPair.className = "header-form-input-pair";
+	if(index%2===0){
+		// @ts-ignore
+		headerInputGroup.container.classList.add("container-even");
+	}
 
-	const keyInputGroup = document.createElement("div");
-	keyInputGroup.className = "input-group";
-
-	const keyInputId = `${baseId}-key-label`;
-	const keyLabel = document.createElement("label");
-	keyLabel.className = "input-label";
-	keyLabel.htmlFor = keyInputId;
-	keyLabel.textContent = "Header";
-	keyInputGroup.appendChild(keyLabel);
-
-	const keyInput = document.createElement("input");
-	keyInput.className = "input";
-	keyInput.id = keyInputId;
-	keyInput.name = `${keyInputId}-key`;
-	keyInput.value = header;
-	keyInputGroup.appendChild(keyInput);
-	inputPair.appendChild(keyInputGroup);
-
-	const valueInputGroup = document.createElement("div");
-	valueInputGroup.className = "input-group";
-
-	const valueInputId = `header-${inputCount++}`;
-	const valueLabel = document.createElement("label");
-	valueLabel.className = "input-label";
-	valueLabel.htmlFor = valueInputId;
-	valueLabel.textContent = "Value";
-	valueInputGroup.appendChild(valueLabel);
-
-	const valueInput = document.createElement("input");
-	valueInput.className = "input";
-	valueInput.id = valueInputId;
-	valueInput.name = `${valueInputId}-value`;
-	valueInput.value = value;
-	valueInputGroup.appendChild(valueInput);
-	inputPair.appendChild(valueInputGroup);
-
-	// TODO: add delete button that removes this inputPair
-
-	inputs.appendChild(inputPair);
+	inputs.appendChild(headerInputGroup);
 }
 
+function refreshHeaderIndexes(){
+	const inputs = document.getElementById("inputs");
+	const isEven = i => i % 2 === 0;
+
+	for(let inputGroupIndex in Array.from(inputs.children)){
+		const inputGroup = inputs.children[inputGroupIndex]
+		if(isEven(inputGroupIndex)){
+			// @ts-ignore
+			inputGroup.container.classList.remove("container-odd");
+			// @ts-ignore
+			inputGroup.container.classList.add("container-even");
+		}else{
+			// @ts-ignore
+			inputGroup.container.classList.remove("container-even");
+			// @ts-ignore
+			inputGroup.container.classList.add("container-odd");
+		}
+	}
+
+}
+
+
 function buildHeadersForm(requestHeaders) {
+	let index=0;
 	for (const { header, value } of Object.values(requestHeaders)) {
-		addHeaderInput(header, value);
+		addHeaderInput(header, value, true, index);
+		index++;
 	}
 
 	const headers = document.getElementById("headers");
@@ -132,17 +126,13 @@ function buildHeadersForm(requestHeaders) {
 
 	document.getElementById("add-header").addEventListener("click", () => {
 		addHeaderInput();
+		refreshHeaderIndexes();
 	});
 
-	document.getElementById("clear").addEventListener("click", () => {
-		backgroundPageConnection.postMessage({
-			name: "podium/update-headers",
-			tabId: agent.devtools.inspectedWindow.tabId,
-			newHeaders: [],
-		});
-		const inputs = document.getElementById("inputs");
-		for (const child of Array.from(inputs.children)) {
-			inputs.removeChild(child);
-		}
-	});
 }
+
+window.addEventListener(eventNames.deleteHeader, (e) => {
+	setTimeout(() => {
+		refreshHeaderIndexes();
+	}, 0);
+});

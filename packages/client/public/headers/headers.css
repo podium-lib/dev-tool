@@ -7,17 +7,18 @@
 .headers-form-inputs {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
 }
 
-.header-form-input-pair {
+.inputs-list{
 	display: flex;
-	flex-direction: row;
-	gap: 8px;
+	flex-direction: column;
 }
 
-.header-form-input-pair .input[name$="-key"] {
-	width: 28ch;
+.inputs-title{
+	display:grid;
+	grid-template-columns: 65px 210px 180px;
+	text-align: center;
+	font-weight: bold;
 }
 
 .headers-form-buttons {
