@@ -25,6 +25,6 @@
 		"prettier": "3.2.5",
 		"semantic-release": "23.0.8",
 		"semantic-release-firefox-add-on": "0.2.8",
-		"typescript": "5.4.3"
+		"typescript": "5.4.5"
 	}
 }
