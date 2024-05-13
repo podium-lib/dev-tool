@@ -12,7 +12,7 @@ backgroundPageConnection.postMessage({
 });
 
 // Listen to messages coming from scripts injected into the page
-window.addEventListener("message", function(event) {
+window.addEventListener("message", function (event) {
 	// Only accept messages from the same frame
 	if (event.source !== window) {
 		return;
@@ -41,8 +41,6 @@ backgroundPageConnection.onMessage.addListener((message) => {
 	}
 });
 
-// TODO: dropdown with presets that calls addHeaderInput with stuff?
-
 function addHeaderInput(header = "", value = "", enabled = true, index) {
 	const inputs = document.getElementById("inputs");
 
@@ -64,7 +62,7 @@ function addHeaderInput(header = "", value = "", enabled = true, index) {
 
 function refreshHeaderIndexes() {
 	const inputsContainer = document.getElementById("inputs");
-	const isEven = i => i % 2 === 0;
+	const isEven = (i) => i % 2 === 0;
 
 	for (let inputGroupIndex in Array.from(inputsContainer.children)) {
 		const inputGroup = inputsContainer.children[inputGroupIndex];
@@ -81,7 +79,6 @@ function refreshHeaderIndexes() {
 		}
 	}
 }
-
 
 function buildHeadersForm(requestHeaders) {
 	let index = 0;
@@ -114,7 +111,6 @@ function buildHeadersForm(requestHeaders) {
 			}
 		}
 
-
 		for (const [header, value] of keyValuePairs) {
 			newHeaders.push({
 				header,
@@ -134,7 +130,6 @@ function buildHeadersForm(requestHeaders) {
 		addHeaderInput();
 		refreshHeaderIndexes();
 	});
-
 }
 
 window.addEventListener(eventNames.deleteHeader, (e) => {
@@ -143,15 +138,14 @@ window.addEventListener(eventNames.deleteHeader, (e) => {
 	}, 0);
 });
 
-
 document.getElementById("preset-select").addEventListener("change", (e) => {
 	const presets = {
-		"mobile": {
+		mobile: {
 			"x-podium-app-id": "lib.podium.app@1.2.3",
 			"x-podium-base-font-size": "1rem",
 			"x-podium-device-type": "mobile",
 		},
-		"desktop": {
+		desktop: {
 			"x-podium-app-id": "lib.podium.app@1.2.3",
 			"x-podium-base-font-size": "1rem",
 			"x-podium-device-type": "desktop",
@@ -179,7 +173,4 @@ document.getElementById("preset-select").addEventListener("change", (e) => {
 	for (const [header, value] of Object.entries(missingHeaders)) {
 		addHeaderInput(header, value, true, inputGroups.length);
 	}
-
-	e.target.value="";
-
 });
