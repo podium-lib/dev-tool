@@ -3,6 +3,26 @@ export const eventNames = {
 	toggleHeader: "toggle-header",
 };
 
+
+/*
+	TODO:
+	This addresses a strange bug/behaviour in how chrome currently loads extensions.
+	The bug causes events for keydown on the letter "h", keycode 72, to not be forwarded to the input.
+	In the future, to check if this bug has been fixed, simply remove this function and the event-listeners.
+	If you are able to type the letter "h" in the input-fields, this can safely be removed.
+ */
+function insertHAtCursor(e) {
+	if (e.key === 'h') {
+		const inputElement = e.target;
+		const cursorPosition = inputElement.selectionStart;
+		const currentValue = inputElement.value;
+		const beforeCursor = currentValue.substring(0, cursorPosition);
+		const afterCursor = currentValue.substring(cursorPosition);
+		inputElement.value = beforeCursor + 'h' + afterCursor;
+		inputElement.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+	}
+}
+
 class HeaderInputGroup extends HTMLElement {
 	constructor() {
 		super();
@@ -75,7 +95,7 @@ class HeaderInputGroup extends HTMLElement {
 		enableCheckbox.type = "checkbox";
 		enableCheckbox.checked = true;
 		enableCheckbox.classList.add("input-checkbox");
-		enableCheckbox.addEventListener("change", () => {
+		enableCheckbox.addEventListener("change", (e) => {
 			this.dispatchEvent(new CustomEvent(eventNames.toggleHeader, { detail: { enabled: enableCheckbox.checked } }));
 		});
 
@@ -84,12 +104,15 @@ class HeaderInputGroup extends HTMLElement {
 		headerNameInput.placeholder = "Header Name";
 		headerNameInput.value = "";
 		headerNameInput.classList.add("input");
+		headerNameInput.addEventListener("keydown", insertHAtCursor, true);
 
 		const headerValueInput = document.createElement("input");
 		headerValueInput.type = "text";
 		headerValueInput.placeholder = "Header Value";
 		headerValueInput.value = "";
 		headerValueInput.classList.add("input");
+		headerValueInput.addEventListener("keydown", insertHAtCursor, true);
+
 
 		const deleteButton = document.createElement("button");
 		deleteButton.textContent = "Delete";
