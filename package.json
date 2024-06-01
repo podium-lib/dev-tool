@@ -14,7 +14,7 @@
 		"types": "npm run types -ws --if-present"
 	},
 	"devDependencies": {
-		"@babel/core": "7.24.5",
+		"@babel/core": "7.24.6",
 		"@qiwi/multi-semantic-release": "7.1.1",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
