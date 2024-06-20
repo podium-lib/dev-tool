@@ -1,8 +1,11 @@
+.header {
+	justify-content: space-between;
+}
+
 .status {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-top: var(--margin-medium);
 	font-size: 12px;
 }
 
@@ -12,58 +15,33 @@
 
 .connection-form {
 	font-weight: 500;
-	margin-bottom: var(--padding-small);
-	color: var(--text-color);
+	margin-bottom: var(--spacing-8);
 	display: flex;
-	background-color: var(--card-bg-color);
 	flex-direction: row;
-	padding: var(--padding-large);
-	border-radius: var(--radius-medium);
+	padding: var(--spacing-24);
 }
 
 .connection-form__submit-button {
-	margin-left: var(--margin-small);
+	margin-left: var(--spacing-8);
 }
 
 .podlets-container {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row;
-	gap: var(--gap-small);
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-	}
-}
-
-.podlet-card {
-	max-width: 600px;
-	margin-top: var(--margin-large);
-	background-color: var(--card-bg-color);
-	border-radius: var(--radius-medium);
-	border: 1px solid var(--border-color);
-}
-
-.podlet-card-heading {
-	padding: 13px; /* This value doesn't fit neatly into small, medium, or large and is used only once */
-	margin: 0;
-	text-align: center;
-	background-color: var(--card-heading-bg-color);
-	overflow: hidden;
-	color: var(--card-heading-color);
-	border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+	flex-wrap: wrap;
+	gap: var(--spacing-24);
 }
 
 .podlet-context-form {
-	margin: var(--margin-medium);
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: var(--gap-large);
-	grid-row-gap: var(--gap-small);
+	min-width: 280px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-8);
 }
 
 .podlet-context-form-submit {
 	grid-column: 1 / -1;
-	margin-top: var(--margin-medium);
+	margin-top: var(--spacing-16);
 	justify-self: center;
 }

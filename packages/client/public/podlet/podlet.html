@@ -7,21 +7,32 @@
 		<link rel="stylesheet" href="./podlet.css" />
 	</head>
 	<body>
+		<header class="header">
+			<p>Podium Context</p>
+			<div class="status">
+				<p class="status__label">Status:&nbsp;</p>
+				<div id="status-meta">Not connected</div>
+			</div>
+		</header>
 		<main class="podium">
+			<p>
+				See the
+				<a target="_blank" href="https://podium-lib.io/docs/guides/context#default-context-variables"
+					>documentation for context variables</a
+				>
+				for more information on each header.
+			</p>
 			<form class="connection-form" id="connection">
 				<div class="input-group">
 					<label for="apibase" class="input-label"> DevTools URL </label>
 					<input class="input" type="text" id="apibase" name="apibase" value="http://localhost:8172/" />
 				</div>
-				<button class="button-primary connection-form__submit-button" type="submit">Connect</button>
+				<div class="form-actions">
+					<button class="button-primary" type="submit">Connect</button>
+				</div>
 			</form>
 
 			<div id="podlets" class="podlets-container"></div>
-
-			<div class="status">
-				<p class="status__label">Status:&nbsp;</p>
-				<div id="status-meta">Not connected</div>
-			</div>
 		</main>
 		<script src="./podlet.js" type="module"></script>
 	</body>

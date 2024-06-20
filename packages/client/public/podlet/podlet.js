@@ -58,11 +58,14 @@ async function connect() {
 			form.appendChild(wrapperElement);
 		}
 
+		const actions = document.createElement("div");
+		actions.className = "form-actions";
 		const submit = document.createElement("button");
-		submit.className = "button-primary podlet-context-form-submit";
+		submit.className = "button-primary";
 		submit.type = "submit";
 		submit.textContent = `Update ${podlet.name}`;
-		form.appendChild(submit);
+		actions.appendChild(submit);
+		form.appendChild(actions);
 
 		form.addEventListener("submit", async (e) => {
 			e.preventDefault();

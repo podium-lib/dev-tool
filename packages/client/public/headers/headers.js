@@ -161,8 +161,8 @@ document.getElementById("preset-select").addEventListener("change", (e) => {
 	for (let inputGroup of inputGroups) {
 		// @ts-ignore
 		const inputs = inputGroup.container.getElementsByTagName("input");
-		const headerInput = inputs[1];
-		const valueInput = inputs[2];
+		const headerInput = inputs[0];
+		const valueInput = inputs[1];
 
 		if (preset[headerInput.value]) {
 			valueInput.value = preset[headerInput.value];

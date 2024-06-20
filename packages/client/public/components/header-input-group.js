@@ -3,7 +3,6 @@ export const eventNames = {
 	toggleHeader: "toggle-header",
 };
 
-
 /*
 	TODO:
 	This addresses a strange bug/behaviour in how chrome currently loads extensions.
@@ -12,13 +11,13 @@ export const eventNames = {
 	If you are able to type the letter "h" in the input-fields, this can safely be removed.
  */
 function insertHAtCursor(e) {
-	if (e.key === 'h') {
+	if (e.key === "h") {
 		const inputElement = e.target;
 		const cursorPosition = inputElement.selectionStart;
 		const currentValue = inputElement.value;
 		const beforeCursor = currentValue.substring(0, cursorPosition);
 		const afterCursor = currentValue.substring(cursorPosition);
-		inputElement.value = beforeCursor + 'h' + afterCursor;
+		inputElement.value = beforeCursor + "h" + afterCursor;
 		inputElement.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
 	}
 }
@@ -29,94 +28,79 @@ class HeaderInputGroup extends HTMLElement {
 		this.attachShadow({ mode: "open" });
 
 		const style = document.createElement("style");
-		style.textContent = `
-            .container {
-                display: flex;
-                align-items: center;
-                gap: var(--gap-small);
-                padding:10px;
-            }
+		style.textContent = /* css */ `
+			.container {
+				display: flex;
+				flex-direction: column;
+				gap: var(--spacing-8);
+			}
 
-            .container-even {
-            		background-color: var(--color-cream);
-						}
-						.container-odd {
-								background-color: white;
-						}
+			.input {
+				border-radius: var(--border-radius);
+				border: var(--input-border);
+				padding: var(--spacing-16);
+				display: block;
+				min-width: 280px;
+				width: 100%;
+			}
 
-            .input-group {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-            }
+			.input-checkbox {
+				display: flex;
+				align-items: center;
+			}
 
-            .input-label {
-                font-weight: 500;
-                margin-bottom: var(--padding-small);
-                color: var(--form-label-color);
-            }
+			.input-checkbox input {
+				cursor: pointer;
+				accent-color: var(--button-primary-bg-color);
+			}
 
-            .input {
-                border-radius: var(--radius-small);
-                border: var(--input-border);
-                width:180px;
-                padding: var(--padding-medium);
-            }
-
-            .input-checkbox {
-                margin: 0 18px 0 10px;
-                cursor: pointer;
-                height: 16px;
-                width: 16px;
-                accent-color: var(--button-primary-bg-color);
-            }
-
-            .button-secondary {
-                background-color: white;
-                color: var(--text-color);
-                align-self: end;
-                padding: var(--padding-medium) var(--padding-large);
-                font-size: 16px;
-                border: 2px solid var(--button-primary-bg-color);
-                font-weight: bold;
-                border-radius: var(--radius-small);
-                cursor: pointer;
-
-                &:hover {
-                    border-color: var(--button-primary-bg-color-hover);
-                }
-            }
-        `;
+			.actions {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+				gap: var(--spacing-16);
+			}`;
 
 		const container = document.createElement("div");
 		container.classList.add("container");
 
-		const enableCheckbox = document.createElement("input");
-		enableCheckbox.type = "checkbox";
-		enableCheckbox.checked = true;
-		enableCheckbox.classList.add("input-checkbox");
-		enableCheckbox.addEventListener("change", (e) => {
-			this.dispatchEvent(new CustomEvent(eventNames.toggleHeader, { detail: { enabled: enableCheckbox.checked } }));
-		});
-
+		const headerNameLabel = document.createElement("label");
+		headerNameLabel.textContent = "Header";
 		const headerNameInput = document.createElement("input");
 		headerNameInput.type = "text";
-		headerNameInput.placeholder = "Header Name";
 		headerNameInput.value = "";
 		headerNameInput.classList.add("input");
 		headerNameInput.addEventListener("keydown", insertHAtCursor, true);
+		headerNameLabel.appendChild(headerNameInput);
+		container.appendChild(headerNameLabel);
 
+		const headerValueLabel = document.createElement("label");
+		headerValueLabel.textContent = "Header value";
 		const headerValueInput = document.createElement("input");
 		headerValueInput.type = "text";
-		headerValueInput.placeholder = "Header Value";
 		headerValueInput.value = "";
 		headerValueInput.classList.add("input");
 		headerValueInput.addEventListener("keydown", insertHAtCursor, true);
+		headerValueLabel.appendChild(headerValueInput);
+		container.appendChild(headerValueLabel);
 
+		const actions = document.createElement("div");
+		actions.className = "actions";
+
+		const enableLabel = document.createElement("label");
+		enableLabel.textContent = "Enabled";
+		enableLabel.classList.add("input-checkbox");
+		const enableCheckbox = document.createElement("input");
+		enableCheckbox.type = "checkbox";
+		enableCheckbox.checked = true;
+		enableCheckbox.addEventListener("change", (e) => {
+			this.dispatchEvent(new CustomEvent(eventNames.toggleHeader, { detail: { enabled: enableCheckbox.checked } }));
+		});
+		enableLabel.appendChild(enableCheckbox);
 
 		const deleteButton = document.createElement("button");
-		deleteButton.textContent = "Delete";
-		deleteButton.classList.add("button-secondary");
+		deleteButton.textContent = `Delete`;
+		deleteButton.classList.add("button-tertiary");
 		deleteButton.addEventListener("click", () => {
 			this.dispatchEvent(
 				new CustomEvent(eventNames.deleteHeader, {
@@ -127,12 +111,14 @@ class HeaderInputGroup extends HTMLElement {
 			this.remove();
 		});
 
-		container.appendChild(enableCheckbox);
-		container.appendChild(headerNameInput);
-		container.appendChild(headerValueInput);
-		container.appendChild(deleteButton);
+		actions.appendChild(enableLabel);
+		actions.appendChild(deleteButton);
+		container.appendChild(actions);
 
-		this.shadowRoot.append(style, container);
+		const globalCss = document.createElement("link");
+		globalCss.rel = "stylesheet";
+		globalCss.href = "../devtools.css";
+		this.shadowRoot.append(style, container, globalCss);
 
 		this.headerNameInput = headerNameInput;
 		this.headerValueInput = headerValueInput;

@@ -1,47 +1,62 @@
 :root {
-	/* Base tokens, aka level one tokens */
-	--color-forest-green: #205a3b;
-	--color-moss-green: #5d826c;
-	--color-cream: #fff8e8;
 	--color-white: #fff;
 	--color-black: #000;
 	--color-grey: #2b2b2b;
-	--color-brown: #231d02;
 	--color-light-grey: lightgray;
-	--color-dark-yellow: #d7ae12;
-	--color-darker-yellow: #a3820f;
 
-	/* Level two tokens, aka semantic tokens */
+	--color-primary: #754f5b;
+	--color-primary-dark: #694752;
+	--color-primary-darker: #63434d;
+	--color-primary-darkest: #523740;
+	--color-primary-light: #815764;
+	--color-primary-lighter: #875b69;
+	--color-primary-lightest: #986776;
+
 	--body-bg-color: var(--color-white);
 	--border-color: var(--color-grey);
 	--text-color: var(--color-black);
-	--heading-color: var(--color-forest-green);
-	--heading-color-dark-bg: var(--color-white);
+	--text-color-on-primary: var(--color-white);
 
-	/* Level three tokens, aka component tokens */
 	--form-label-color: var(--color-grey);
 
 	--input-border: 1px solid var(--border-color);
 
-	--button-primary-color: var(--color-brown);
-	--button-primary-bg-color: var(--color-dark-yellow);
-	--button-primary-bg-color-hover: var(--color-darker-yellow);
+	--button-primary-color: var(--color-primary);
+	--button-primary-bg-color: var(--color-primary);
+	--button-primary-bg-color-hover: var(--color-primary-light);
 
 	--card-bg-color: var(--color-white);
 	--card-heading-color: var(--color-white);
 	--card-heading-bg-color: var(--color-moss-green);
 
-	/* Size Variables */
-	--padding-small: 5px;
-	--padding-medium: 10px;
-	--padding-large: 15px;
-	--margin-small: 10px;
-	--margin-medium: 20px;
-	--margin-large: 30px;
-	--gap-small: 10px;
-	--gap-large: 30px;
-	--radius-small: 5px;
-	--radius-medium: 10px;
+	--border-radius: 4px;
+
+	--spacing-8: 8px;
+	--spacing-16: 16px;
+	--spacing-24: 24px;
+	--spacing-32: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-primary: #d3c1d2;
+		--color-primary-dark: #c2a9c1;
+		--color-primary-darker: #ba9eb8;
+		--color-primary-darkest: #a17a9f;
+		--color-primary-light: #e4d9e3;
+		--color-primary-lighter: #ece4ec;
+		--color-primary-lightest: #ffffff;
+
+		--body-bg-color: var(--color-black);
+		--text-color: var(--color-white);
+		--text-color-on-primary: var(--color-black);
+
+		--button-primary-bg-color-hover: var(--color-primary-dark);
+	}
+}
+
+* {
+	box-sizing: border-box;
 }
 
 html {
@@ -53,6 +68,21 @@ html {
 	background-color: var(--body-bg-color);
 }
 
+body {
+	margin: 0;
+	padding-bottom: var(--spacing-24);
+}
+
+.header {
+	background-color: var(--color-primary);
+	color: var(--text-color-on-primary);
+	width: 100;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 var(--spacing-12);
+}
+
 .input-group {
 	width: 100%;
 	display: flex;
@@ -61,25 +91,23 @@ html {
 
 .input-label {
 	font-weight: 500;
-	margin-bottom: var(--padding-small);
+	margin-bottom: var(--spacing-8);
 	color: var(--form-label-color);
 }
 
 .input {
-	border-radius: var(--radius-small);
+	border-radius: var(--border-radius);
 	border: var(--input-border);
-	padding: var(--padding-medium);
+	padding: var(--spacing-8);
+	outline-color: var(--color-primary);
 }
 
 .button-primary {
 	background-color: var(--button-primary-bg-color);
-	color: var(--button-primary-color);
-	align-self: end;
-	padding: var(--padding-medium) var(--padding-large);
-	font-size: 16px;
 	border: 2px solid transparent;
-	font-weight: bold;
-	border-radius: var(--radius-small);
+	color: var(--text-color-on-primary);
+	padding: var(--spacing-8) var(--spacing-16);
+	border-radius: var(--border-radius);
 
 	&:hover {
 		background-color: var(--button-primary-bg-color-hover);
@@ -91,11 +119,9 @@ html {
 	background-color: transparent;
 	color: var(--text-color);
 	align-self: end;
-	padding: var(--padding-medium) var(--padding-large);
-	font-size: 16px;
+	padding: var(--spacing-8) var(--spacing-16);
 	border: 2px solid var(--button-primary-bg-color);
-	font-weight: bold;
-	border-radius: var(--radius-small);
+	border-radius: var(--border-radius);
 
 	&:hover {
 		border-color: var(--button-primary-bg-color-hover);
@@ -103,13 +129,45 @@ html {
 	}
 }
 
+.button-tertiary {
+	appearance: none;
+	color: var(--text-color);
+	border: 1px solid transparent;
+	border-bottom: 1px solid var(--color-primary);
+	background: transparent;
+
+	&:hover {
+		cursor: pointer;
+		border-color: var(--button-primary-bg-color-hover);
+	}
+}
+
 .podium {
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	margin: var(--margin-small);
+	margin: var(--spacing-8);
 }
 
 .title {
 	color: var(--heading-color);
+}
+
+.sr-only {
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	position: absolute;
+	overflow: hidden;
+}
+
+.form-actions {
+	margin-top: var(--spacing-16);
+	justify-content: flex-end;
+	display: flex;
+	gap: var(--spacing-8);
 }
