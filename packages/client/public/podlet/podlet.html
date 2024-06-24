@@ -3,26 +3,33 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Podium Developer Tools</title>
+		<link rel="stylesheet" href="../devtools.css" />
 		<link rel="stylesheet" href="./podlet.css" />
 	</head>
 	<body>
-		<main class="podium">
-			<h1 class="title">Podium developer tools</h1>
-
+		<header class="header">
+			<p>Podium Context</p>
 			<div class="status">
 				<p class="status__label">Status:&nbsp;</p>
 				<div id="status-meta">Not connected</div>
 			</div>
-
+		</header>
+		<main class="podium">
+			<p>
+				See the
+				<a target="_blank" href="https://podium-lib.io/docs/guides/context#default-context-variables"
+					>documentation for context variables</a
+				>
+				for more information on each header.
+			</p>
 			<form class="connection-form" id="connection">
 				<div class="input-group">
-					<label for="apibase" class="input-label">
-						DevTools URL
-					</label>
+					<label for="apibase" class="input-label"> DevTools URL </label>
 					<input class="input" type="text" id="apibase" name="apibase" value="http://localhost:8172/" />
 				</div>
-					<button class="button-primary connection-form__submit-button" type="submit">Connect</button>
-
+				<div class="form-actions">
+					<button class="button-primary" type="submit">Connect</button>
+				</div>
 			</form>
 
 			<div id="podlets" class="podlets-container"></div>

@@ -1,108 +1,11 @@
-:root {
-	/* Base tokens, aka level one tokens */
-	--color-forest-green: #205a3b;
-	--color-moss-green: #5d826c;
-	--color-cream: #fff8e8;
-	--color-white: #fff;
-	--color-black: #000;
-	--color-grey: #2b2b2b;
-	--color-brown: #231d02;
-	--color-light-grey: lightgray;
-	--color-dark-yellow: #d7ae12;
-	--color-darker-yellow: #a3820f;
-
-	/* Level two tokens, aka semantic tokens */
-	--body-bg-color: var(--color-cream);
-	--border-color: var(--color-grey);
-	--text-color: var(--color-black);
-	--heading-color: var(--color-forest-green);
-	--heading-color-dark-bg: var(--color-white);
-
-	/* Level three tokens, aka component tokens */
-	--form-label-color: var(--color-grey);
-
-	--input-border: 1px solid var(--border-color);
-
-	--button-primary-color: var(--color-brown);
-	--button-primary-bg-color: var(--color-dark-yellow);
-	--button-primary-bg-color-hover: var(--color-darker-yellow);
-
-	--card-bg-color: var(--color-white);
-	--card-heading-color: var(--color-white);
-	--card-heading-bg-color: var(--color-moss-green);
-
-	/* Size Variables */
-	--padding-small: 5px;
-	--padding-medium: 10px;
-	--padding-large: 15px;
-	--margin-small: 10px;
-	--margin-medium: 20px;
-	--margin-large: 30px;
-	--gap-small: 10px;
-	--gap-large: 30px;
-	--radius-small:5px;
-	--radius-medium:10px;
-
-}
-
-html {
-	font-family: Helvetica Neue, Helvetica, Arial;
-	margin: 0;
-	background-color: var(--body-bg-color);
-}
-
-.input-group {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-}
-
-.input-label {
-	font-weight: 500;
-	margin-bottom: var(--padding-small);
-	color: var(--form-label-color);
-}
-
-.input {
-	border-radius: var(--radius-small);
-	border: var(--input-border);
-	padding: var(--padding-medium);
-}
-
-.button-primary {
-	background-color: var(--button-primary-bg-color);
-	color: var(--button-primary-color);
-	align-self: end;
-	padding: var(--padding-medium) var(--padding-large);
-	font-size: 16px;
-	border: none;
-	font-weight: bold;
-	border-radius: var(--radius-small);
-
-	&:hover {
-		background-color: var(--button-primary-bg-color-hover);
-		cursor: pointer;
-	}
-}
-
-.podium {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: var(--margin-medium);
-	margin: var(--margin-small);
-}
-
-.title {
-	color: var(--heading-color);
+.header {
+	justify-content: space-between;
 }
 
 .status {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-top: calc(var(--margin-small) * -1);
-	margin-bottom: var(--margin-medium);
 	font-size: 12px;
 }
 
@@ -112,57 +15,33 @@ html {
 
 .connection-form {
 	font-weight: 500;
-	margin-bottom: var(--padding-small);
-	color: var(--text-color);
+	margin-bottom: var(--spacing-8);
 	display: flex;
-	background-color: var(--card-bg-color);
 	flex-direction: row;
-	padding: var(--padding-large);
-	border-radius: var(--radius-medium);
+	padding: var(--spacing-24);
 }
 
 .connection-form__submit-button {
-	margin-left: var(--margin-small);
+	margin-left: var(--spacing-8);
 }
 
 .podlets-container {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row;
-	gap: var(--gap-small);
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-	}
-}
-
-.podlet-card {
-	max-width: 600px;
-	margin-top: var(--margin-large);
-	background-color: var(--card-bg-color);
-	border-radius: var(--radius-medium);
-}
-
-.podlet-card-heading {
-	padding: 13px;  /* This value doesn't fit neatly into small, medium, or large and is used only once */
-	margin: 0;
-	text-align: center;
-	background-color: var(--card-heading-bg-color);
-	overflow: hidden;
-	color: var(--card-heading-color);
-	border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+	flex-wrap: wrap;
+	gap: var(--spacing-24);
 }
 
 .podlet-context-form {
-	margin: var(--margin-medium);
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: var(--gap-large);
-	grid-row-gap: var(--gap-small);
+	min-width: 280px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-8);
 }
 
 .podlet-context-form-submit {
 	grid-column: 1 / -1;
-	margin-top: var(--margin-medium);
+	margin-top: var(--spacing-16);
 	justify-self: center;
 }

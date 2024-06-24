@@ -1,0 +1,22 @@
+.preset-select {
+	background-color: transparent;
+	color: var(--text-color);
+	border: 1px solid var(--color-primary);
+	border-radius: var(--border-radius);
+	padding: unset;
+}
+
+.headers-form {
+	margin-top: var(--spacing-16);
+}
+
+.headers-form-inputs {
+	display: flex;
+	flex-direction: column;
+}
+
+.inputs-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-24);
+}

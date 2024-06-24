@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Podium Layout Developer Tools</title>
+		<link rel="stylesheet" href="../devtools.css" />
+		<link rel="stylesheet" href="./headers.css" />
+	</head>
+	<body>
+		<header class="header">
+			<p>Podium Headers</p>
+		</header>
+		<main class="podium">
+			<p>
+				See the
+				<a target="_blank" href="https://podium-lib.io/docs/guides/hybrid">documentation for hybrid</a>
+				for more information on each header.
+			</p>
+
+			<h2>Request headers</h2>
+			<div>
+				<label for="preset-select">Select preset</label>
+				<select class="input preset-select" id="preset-select">
+					<option value="">---</option>
+					<option value="desktop">Desktop</option>
+					<option value="mobile">Mobile</option>
+				</select>
+			</div>
+			<form id="headers" class="headers-form">
+				<div id="inputs" class="inputs-list"></div>
+				<div class="form-actions">
+					<button id="add-header" class="button-secondary" type="button">Add header</button>
+					<button class="button-primary" type="submit">Save and reload</button>
+				</div>
+			</form>
+		</main>
+		<script src="./headers.js" type="module"></script>
+	</body>
+</html>
