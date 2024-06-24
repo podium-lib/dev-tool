@@ -1,3 +1,10 @@
+# podium-dev-tools [0.3.0](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.2.3...podium-dev-tools@0.3.0) (2024-06-24)
+
+
+### Features
+
+* layout devtool pane ([#76](https://github.com/podium-lib/dev-tool/issues/76)) ([b8a784d](https://github.com/podium-lib/dev-tool/commit/b8a784dc8db3a42609f927bdaf7713413e1dd070))
+
 ## podium-dev-tools [0.2.3](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.2.2...podium-dev-tools@0.2.3) (2024-04-15)
 
 
