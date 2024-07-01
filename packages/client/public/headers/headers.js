@@ -34,10 +34,6 @@ backgroundPageConnection.onMessage.addListener((message) => {
 			buildHeadersForm(message.requestHeaders);
 			break;
 		}
-		case "podium/headers-updated": {
-			agent.tabs.reload(agent.devtools.inspectedWindow.tabId);
-			break;
-		}
 	}
 });
 
@@ -102,9 +98,9 @@ function buildHeadersForm(requestHeaders) {
 		for (let inputGroup of inputGroups) {
 			// @ts-ignore
 			const inputs = inputGroup.container.getElementsByTagName("input");
-			const checkboxInput = inputs[0].checked;
-			const headerInput = inputs[1].value;
-			const valueInput = inputs[2].value;
+			const headerInput = inputs[0].value;
+			const valueInput = inputs[1].value;
+			const checkboxInput = inputs[2].checked;
 
 			if (checkboxInput && headerInput && valueInput) {
 				keyValuePairs.push([headerInput, valueInput]);

@@ -125,4 +125,6 @@ async function onUpdateHeaders(connection, message) {
 	connection.postMessage({
 		name: "podium/headers-updated",
 	});
+
+	agent.tabs.reload(message.tabId);
 }
