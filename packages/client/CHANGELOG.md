@@ -1,3 +1,11 @@
+## podium-dev-tools [0.3.1](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.0...podium-dev-tools@0.3.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* declare background.scripts for Firefox compat ([e8702fe](https://github.com/podium-lib/dev-tool/commit/e8702fe5db59a32139dcd419f22dad10841bae87))
+* reload, form submit after DOM changes ([05d76fa](https://github.com/podium-lib/dev-tool/commit/05d76fa455aa9d4717e9727c813abc2e900252d6))
+
 # podium-dev-tools [0.3.0](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.2.3...podium-dev-tools@0.3.0) (2024-06-24)
 
 
