@@ -1,5 +1,6 @@
-// This runs as a service worker and communicates with the content script layout.js via message passing
+// This runs as a service worker* and communicates with the content script layout.js via message passing
 // See https://developer.chrome.com/docs/extensions/how-to/devtools/extend-devtools for an intro to the architecture.
+// *: in Firefox this may run as a regular script in a background page: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background#browser_support
 
 const agent = typeof globalThis.browser !== "undefined" ? globalThis.browser : globalThis.chrome;
 
@@ -124,4 +125,6 @@ async function onUpdateHeaders(connection, message) {
 	connection.postMessage({
 		name: "podium/headers-updated",
 	});
+
+	agent.tabs.reload(message.tabId);
 }
