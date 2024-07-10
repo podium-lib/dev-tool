@@ -53,6 +53,8 @@ The process is similar across browsers. Also note that some changes may require 
 
 You'll have to [repeat the steps](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing) the next time you start Firefox, and hit the refresh button when you rebuild the extension.
 
+NB: you may have to give the Podium extension permission to run. Look for a dot on the extension and consider allowing it to always run on the domain you're working on.
+
 #### Chrome
 
 The approach should be similar in Chromium-based browsers.
