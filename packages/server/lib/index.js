@@ -36,7 +36,7 @@ export default class DevTool {
 	#podlets = [];
 
 	/**
-	 * @type {import('abslog').AbstractLogger}
+	 * @type {import('abslog').ValidLogger}
 	 */
 	#log;
 
