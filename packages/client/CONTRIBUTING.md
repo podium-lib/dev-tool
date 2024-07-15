@@ -28,7 +28,7 @@ The extension JavaScript bundle is generated to the `public/` directory, and the
 
 We use [`web-ext`](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) to get a quick and simple development environment in Chrome and Firefox.
 
-1. Run `npm install --legacy-peer-deps`
+1. Run `npm install`
 2. Run `npm start`
 
 Chrome will open automatically.
