@@ -1,4 +1,4 @@
-import { eventNames } from "../components/header-input-group.js";
+import { createInputGroup } from "./header-input.js";
 
 const agent = typeof globalThis.browser !== "undefined" ? globalThis.browser : globalThis.chrome;
 
@@ -37,50 +37,15 @@ backgroundPageConnection.onMessage.addListener((message) => {
 	}
 });
 
-function addHeaderInput(header = "", value = "", enabled = true, index) {
+function addHeaderInput(header = "", value = "", enabled = true) {
 	const inputs = document.getElementById("inputs");
-
-	const headerInputGroup = document.createElement("header-input-group");
-	// @ts-ignore
-	headerInputGroup.headerNameInput.value = header;
-	// @ts-ignore
-	headerInputGroup.headerValueInput.value = value;
-	// @ts-ignore
-	headerInputGroup.enableCheckbox.checked = enabled;
-
-	if (index % 2 === 0) {
-		// @ts-ignore
-		headerInputGroup.container.classList.add("container-even");
-	}
-
+	const headerInputGroup = createInputGroup({ header, value, enabled });
 	inputs.appendChild(headerInputGroup);
 }
 
-function refreshHeaderIndexes() {
-	const inputsContainer = document.getElementById("inputs");
-	const isEven = (i) => i % 2 === 0;
-
-	for (let inputGroupIndex in Array.from(inputsContainer.children)) {
-		const inputGroup = inputsContainer.children[inputGroupIndex];
-		if (isEven(inputGroupIndex)) {
-			// @ts-ignore
-			inputGroup.container.classList.remove("container-odd");
-			// @ts-ignore
-			inputGroup.container.classList.add("container-even");
-		} else {
-			// @ts-ignore
-			inputGroup.container.classList.remove("container-even");
-			// @ts-ignore
-			inputGroup.container.classList.add("container-odd");
-		}
-	}
-}
-
 function buildHeadersForm(requestHeaders) {
-	let index = 0;
 	for (const { header, value } of Object.values(requestHeaders)) {
-		addHeaderInput(header, value, true, index);
-		index++;
+		addHeaderInput(header, value, true);
 	}
 
 	const headers = document.getElementById("headers");
@@ -90,14 +55,12 @@ function buildHeadersForm(requestHeaders) {
 		// Read the inputs from the headers form
 		const newHeaders = [];
 
-		// TODO: filter to only inlcude active checked
 		const inputsContainer = document.getElementById("inputs");
 
 		const inputGroups = Array.from(inputsContainer.children);
 		const keyValuePairs = [];
 		for (let inputGroup of inputGroups) {
-			// @ts-ignore
-			const inputs = inputGroup.container.getElementsByTagName("input");
+			const inputs = inputGroup.getElementsByTagName("input");
 			const headerInput = inputs[0].value;
 			const valueInput = inputs[1].value;
 			const checkboxInput = inputs[2].checked;
@@ -124,15 +87,8 @@ function buildHeadersForm(requestHeaders) {
 
 	document.getElementById("add-header").addEventListener("click", () => {
 		addHeaderInput();
-		refreshHeaderIndexes();
 	});
 }
-
-window.addEventListener(eventNames.deleteHeader, (e) => {
-	setTimeout(() => {
-		refreshHeaderIndexes();
-	}, 0);
-});
 
 document.getElementById("preset-select").addEventListener("change", (e) => {
 	const presets = {
@@ -146,17 +102,25 @@ document.getElementById("preset-select").addEventListener("change", (e) => {
 			"x-podium-base-font-size": "1rem",
 			"x-podium-device-type": "desktop",
 		},
+		"hybrid-ios": {
+			"x-podium-app-id": "lib.podium.app@1.2.3",
+			"x-podium-base-font-size": "1rem",
+			"x-podium-device-type": "hybrid-ios",
+		},
+		"hybrid-android": {
+			"x-podium-app-id": "lib.podium.app@1.2.3",
+			"x-podium-base-font-size": "1rem",
+			"x-podium-device-type": "hybrid-android",
+		},
 	};
 
-	// @ts-ignore
-	const preset = presets[e.target.value];
+	const preset = presets[/** @type {HTMLSelectElement} */ (e.target).value];
 
 	const inputsContainer = document.getElementById("inputs");
 	const inputGroups = Array.from(inputsContainer.children);
 	let missingHeaders = preset;
 	for (let inputGroup of inputGroups) {
-		// @ts-ignore
-		const inputs = inputGroup.container.getElementsByTagName("input");
+		const inputs = inputGroup.getElementsByTagName("input");
 		const headerInput = inputs[0];
 		const valueInput = inputs[1];
 
@@ -167,6 +131,6 @@ document.getElementById("preset-select").addEventListener("change", (e) => {
 	}
 
 	for (const [header, value] of Object.entries(missingHeaders)) {
-		addHeaderInput(header, value, true, inputGroups.length);
+		addHeaderInput(header, value, true);
 	}
 });
