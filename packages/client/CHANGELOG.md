@@ -1,3 +1,10 @@
+## podium-dev-tools [0.3.3](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.2...podium-dev-tools@0.3.3) (2024-07-15)
+
+
+### Bug Fixes
+
+* header view on second visit should no longer be empty ([6a9b47a](https://github.com/podium-lib/dev-tool/commit/6a9b47ae17d0e40ad096d0092e8fa32282054bfd))
+
 ## podium-dev-tools [0.3.2](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.1...podium-dev-tools@0.3.2) (2024-07-15)
 
 
