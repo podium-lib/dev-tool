@@ -32,6 +32,7 @@
 	--border-radius: 4px;
 
 	--spacing-8: 8px;
+	--spacing-12: 12px;
 	--spacing-16: 16px;
 	--spacing-24: 24px;
 	--spacing-32: 32px;
@@ -76,11 +77,11 @@ body {
 .header {
 	background-color: var(--color-primary);
 	color: var(--text-color-on-primary);
-	width: 100;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding: 0 var(--spacing-12);
+	padding: 0 var(--spacing-16);
 }
 
 .input-group {
