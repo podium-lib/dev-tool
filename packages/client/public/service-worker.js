@@ -81,17 +81,18 @@ async function onInit(connection, message) {
 		],
 	};
 	try {
-		await agent.declarativeNetRequest.updateDynamicRules(defaultRules);
+		await agent.declarativeNetRequest.updateSessionRules(defaultRules);
 	} catch (e) {
 		// We don't want to fail in case the rules are already set
 		console.error(e);
+		console.debug(`Tried to set rules to `, defaultRules);
 	}
 
-	const activeRules = await agent.declarativeNetRequest.getDynamicRules();
+	const activeRules = await agent.declarativeNetRequest.getSessionRules();
 
 	connection.postMessage({
 		name: "podium/request-headers",
-		requestHeaders: activeRules[0].action.requestHeaders,
+		requestHeaders: activeRules[0]?.action.requestHeaders,
 	});
 }
 
@@ -100,12 +101,12 @@ async function onUpdateHeaders(connection, message) {
 
 	if (newHeaders.length === 0) {
 		// Remove all rules
-		await agent.declarativeNetRequest.updateDynamicRules({
+		await agent.declarativeNetRequest.updateSessionRules({
 			removeRuleIds: [1],
 		});
 	} else {
 		// Set new rules
-		await agent.declarativeNetRequest.updateDynamicRules({
+		await agent.declarativeNetRequest.updateSessionRules({
 			removeRuleIds: [1],
 			addRules: [
 				{
