@@ -1,3 +1,11 @@
+## podium-dev-tools [0.3.2](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.1...podium-dev-tools@0.3.2) (2024-07-15)
+
+
+### Bug Fixes
+
+* align header and content padding ([4844883](https://github.com/podium-lib/dev-tool/commit/4844883f5b5d586995360beeb9b88dccdea9284a))
+* css issue in devtool header ([74d8c6f](https://github.com/podium-lib/dev-tool/commit/74d8c6f90b2c945f1eb3ae8834621f09f5a688d0))
+
 ## podium-dev-tools [0.3.1](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.0...podium-dev-tools@0.3.1) (2024-07-01)
 
 
