@@ -1,3 +1,10 @@
+## @podium/dev-tool [5.0.8](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.7...@podium/dev-tool@5.0.8) (2024-07-15)
+
+
+### Bug Fixes
+
+* update abslog ([#108](https://github.com/podium-lib/dev-tool/issues/108)) ([4facaa4](https://github.com/podium-lib/dev-tool/commit/4facaa441eca311c9e933bb97f122aa043d8a257))
+
 ## @podium/dev-tool [5.0.7](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.6...@podium/dev-tool@5.0.7) (2024-06-28)
 
 
