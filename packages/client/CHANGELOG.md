@@ -1,3 +1,10 @@
+## podium-dev-tools [0.3.4](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.3...podium-dev-tools@0.3.4) (2024-07-24)
+
+
+### Bug Fixes
+
+* add publishing to chrome store via semantic-release-chrome ([b869549](https://github.com/podium-lib/dev-tool/commit/b869549f3014215053d0a0bd0a374da45816c734))
+
 ## podium-dev-tools [0.3.3](https://github.com/podium-lib/dev-tool/compare/podium-dev-tools@0.3.2...podium-dev-tools@0.3.3) (2024-07-15)
 
 
