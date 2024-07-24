@@ -16,7 +16,7 @@
 			"semantic-release-chrome",
 			{
 				"extensionId": "jdlcejoeifgnnnckhnhapbmgieajaipl",
-				"distFolder": "public",
+				"distFolder": "packages/client/public",
 				"asset": "podium-dev-tools.zip"
 			}
 		],
