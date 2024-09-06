@@ -31,7 +31,7 @@
 	"devDependencies": {
 		"@types/node": "22.5.1",
 		"@podium/podlet": "5.1.12",
-		"@podium/proxy": "5.0.24",
+		"@podium/proxy": "5.0.25",
 		"supertest": "6.3.4"
 	},
 	"dependencies": {
