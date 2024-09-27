@@ -1,8 +1,7 @@
 {
-	"extends": "../../tsconfig.json",
-	"include": ["./lib/**/*.js"],
-	"exclude": ["./lib/**/*.test.js"],
-	"compilerOptions": {
-		"outDir": "types"
-	}
+    "extends": "@podium/typescript-config/module.json",
+    "include": ["./lib/**/*.js"],
+    "compilerOptions": {
+        "outDir": "types"
+    }
 }

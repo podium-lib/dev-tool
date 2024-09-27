@@ -25,7 +25,9 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
 		"test": "node --test",
-		"types": "tsc --declaration --emitDeclarationOnly"
+		"types": "run-s types:tsc types:test",
+		"types:tsc": "tsc",
+		"types:test": "tsc --project tsconfig.test.json"
 	},
 	"author": "Richard Walker <richard.walker@schibsted.com>",
 	"devDependencies": {
