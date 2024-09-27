@@ -137,9 +137,9 @@ export default class DevTool {
 			if (response) {
 				const context = this.#denormalize(JSON.parse(response));
 				for (const podlet of this.#podlets) {
-					if (req.params.name && req.params.name !== podlet.name)
-						// eslint-disable-next-line no-continue
+					if (req.params.name && req.params.name !== podlet.name) {
 						continue;
+					}
 					podlet.defaults(context);
 				}
 			}
