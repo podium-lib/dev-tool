@@ -1,3 +1,10 @@
+## @podium/dev-tool [5.0.15](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.14...@podium/dev-tool@5.0.15) (2024-11-07)
+
+
+### Bug Fixes
+
+* assign a random port for devtools in case of conflict ([#136](https://github.com/podium-lib/dev-tool/issues/136)) ([b9ec263](https://github.com/podium-lib/dev-tool/commit/b9ec263faa208a3b9aa97172b4d32216b4f07b68)), closes [#77](https://github.com/podium-lib/dev-tool/issues/77)
+
 ## @podium/dev-tool [5.0.14](https://github.com/podium-lib/dev-tool/compare/@podium/dev-tool@5.0.13...@podium/dev-tool@5.0.14) (2024-09-23)
 
 
