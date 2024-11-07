@@ -71,16 +71,38 @@ test("starting on a random port", async (t) => {
 		error: t.mock.fn(),
 		fatal: t.mock.fn(),
 	};
-	devTool = new DevTool({ logger, port: 0 });
+	const a = new DevTool({ logger, port: 4321 });
+	const b = new DevTool({ logger, port: 4321 });
+	await a.start();
+	await b.start();
+	await a.stop();
+	await b.stop();
+
+	assert.match(logger.trace.mock.calls[0].arguments[0], /dev tool server started on port "4321"/);
+	assert.match(logger.trace.mock.calls[2].arguments[0], /dev tool server started on port "/);
+	assert.notEqual(logger.trace.mock.calls[2].arguments[0], "undefined");
+	assert.notEqual(logger.trace.mock.calls[2].arguments[0], "null");
+	assert.notEqual(logger.trace.mock.calls[2].arguments[0], "8172");
+	assert.equal(logger.trace.mock.calls.length, 5);
+});
+
+test("assigns a random port if the specified port isn't available", async (t) => {
+	const logger = {
+		trace: t.mock.fn(),
+		debug: t.mock.fn(),
+		info: t.mock.fn(),
+		warn: t.mock.fn(),
+		error: t.mock.fn(),
+		fatal: t.mock.fn(),
+	};
+	devTool = new DevTool({ logger });
 	devTool.register(podlet);
 
 	await devTool.start();
 	await devTool.stop();
 
-	assert.match(logger.trace.mock.calls[0].arguments[0], /dev tool server started on port "/);
-	assert.notEqual(logger.trace.mock.calls[0].arguments[0], "undefined");
-	assert.notEqual(logger.trace.mock.calls[0].arguments[0], "null");
-	assert.notEqual(logger.trace.mock.calls[0].arguments[0], "8172");
+	assert.match(logger.trace.mock.calls[0].arguments[0], /dev tool server started on port "8172" \(in/);
+	assert.match(logger.trace.mock.calls[1].arguments[0], /dev tool server shutdown in/);
 	assert.equal(logger.trace.mock.calls.length, 2);
 });
 
