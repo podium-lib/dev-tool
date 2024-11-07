@@ -164,14 +164,28 @@ export default class DevTool {
 	 * @see {@link DevTool.stop}
 	 */
 	start() {
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 			const start = new Date().getTime();
-			this.server = this.app.listen(this.port, () => {
-				const ms = new Date().getTime() - start;
-				this.port = this.server.address().port;
-				this.#log.trace(`dev tool server started on port "${this.port}" (in ${ms} ms)`);
-				resolve();
-			});
+			this.server = this.app
+				.listen(this.port, () => {
+					const ms = new Date().getTime() - start;
+					this.port = this.server.address().port;
+					this.#log.trace(`dev tool server started on port "${this.port}" (in ${ms} ms)`);
+					resolve();
+				})
+				.on("error", (e) => {
+					if (e.code === "EADDRINUSE") {
+						this.#log.trace(`dev tool server port ${this.port} is already in use, trying a random port`);
+						this.server = this.app.listen(0, () => {
+							const ms = new Date().getTime() - start;
+							this.port = this.server.address().port;
+							this.#log.trace(`dev tool server started on port "${this.port}" (in ${ms} ms)`);
+							resolve();
+						});
+					} else {
+						reject(e);
+					}
+				});
 		});
 	}
 
