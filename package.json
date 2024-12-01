@@ -14,15 +14,15 @@
 		"types": "npm run types -ws --if-present"
 	},
 	"devDependencies": {
-		"@podium/eslint-config": "1.0.0",
+		"@podium/eslint-config": "1.0.3",
 		"@podium/typescript-config": "1.0.0",
 		"@qiwi/multi-semantic-release": "7.1.2",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
-		"eslint": "9.11.1",
+		"eslint": "9.16.0",
 		"npm-run-all2": "6.2.6",
 		"patch-package": "8.0.0",
-		"prettier": "3.3.3",
+		"prettier": "3.4.1",
 		"semantic-release": "23.1.1",
 		"semantic-release-chrome": "3.2.0",
 		"semantic-release-firefox-add-on": "0.2.8",
