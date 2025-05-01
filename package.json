@@ -14,12 +14,12 @@
 		"types": "npm run types -ws --if-present"
 	},
 	"devDependencies": {
-		"@podium/eslint-config": "1.0.10",
+		"@podium/eslint-config": "1.0.11",
 		"@podium/typescript-config": "1.0.0",
 		"@qiwi/multi-semantic-release": "7.1.2",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
-		"eslint": "9.23.0",
+		"eslint": "9.25.1",
 		"npm-run-all2": "6.2.6",
 		"patch-package": "8.0.0",
 		"prettier": "3.5.3",
