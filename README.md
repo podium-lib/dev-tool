@@ -1,11 +1,11 @@
-# Podium dev tools
+# Podium Developer Tools
 
-## 📦 Packages
+This browser extension helps you test and debug your [Podium applications](https://podium-lib.io/).
 
-This is an npm workspace containing:
+To get started, download the extension:
 
-- A [browser extension](packages/client/) for developers of Podium applications
-- [@podium/dev-tool](packages/server/), a module that adds APIs to your podlet needed by the browser extension
+- Chrome web store
+- Firefox Add-ons
 
 ## 🧑‍💻 Development
 
