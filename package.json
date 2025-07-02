@@ -6,7 +6,9 @@
 	"homepage": "https://podium-lib.io/",
 	"scripts": {
 		"build": "web-ext build --source-dir public --artifacts-dir dist --overwrite-dest",
-		"start": "npm run web-ext-chrome",
+		"lint": "eslint",
+		"lint:fix": "eslint --fix",
+		"start": "echo '💁 run start:chrome or start:firefox instead'",
 		"start:firefox": "npm run web-ext-firefox",
 		"start:chrome": "npm run web-ext-chrome",
 		"web-ext-firefox": "web-ext run --source-dir public",
