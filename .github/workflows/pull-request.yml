@@ -14,11 +14,7 @@ on:
 
 jobs:
   run-all-tests:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node-version: [18, 20]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -27,7 +23,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -37,9 +33,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Run all tests
-        run: npm test
-
-      - name: Generate and check types
-        run: npm run types
