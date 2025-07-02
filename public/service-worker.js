@@ -7,7 +7,7 @@ const agent = typeof globalThis.browser !== "undefined" ? globalThis.browser : g
 const connections = {};
 
 agent.runtime.onConnect.addListener((connection) => {
-	const listener = (message, sender, sendResponse) => {
+	const listener = (message) => {
 		if (message.name == "podium/init") {
 			connections[message.tabId] = connection;
 			try {
@@ -42,7 +42,7 @@ agent.runtime.onConnect.addListener((connection) => {
 });
 
 // Receive message from content script and relay to the devTools page for the current tab
-agent.runtime.onMessage.addListener((request, sender, sendResponse) => {
+agent.runtime.onMessage.addListener((request, sender) => {
 	// Messages from content scripts should have sender.tab set
 	if (sender.tab) {
 		var tabId = sender.tab.id;
@@ -57,7 +57,7 @@ agent.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	return true;
 });
 
-async function onInit(connection, message) {
+async function onInit(connection) {
 	const defaultRules = {
 		// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/declarativeNetRequest/Rule
 		addRules: [
