@@ -34,7 +34,7 @@
 		"@types/node": "24.1.0",
 		"@podium/podlet": "5.1.17",
 		"@podium/proxy": "5.0.28",
-		"supertest": "6.3.4"
+		"supertest": "7.1.4"
 	},
 	"dependencies": {
 		"@podium/context": "^5.0.0",
