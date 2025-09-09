@@ -1,3 +1,3 @@
-import config from '@podium/eslint-config';
+import config from "@podium/eslint-config";
 
 export default config;
