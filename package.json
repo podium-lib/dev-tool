@@ -5,6 +5,7 @@
 	"private": true,
 	"homepage": "https://podium-lib.io/",
 	"scripts": {
+		"postinstall": "patch-package",
 		"build": "web-ext build --source-dir public --artifacts-dir dist --overwrite-dest",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix",
