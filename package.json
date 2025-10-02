@@ -16,10 +16,10 @@
 		"web-ext-chrome": "web-ext run --target chromium --source-dir public"
 	},
 	"devDependencies": {
-		"@podium/eslint-config": "1.0.18",
+		"@podium/eslint-config": "1.0.19",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
-		"eslint": "9.32.0",
+		"eslint": "9.36.0",
 		"npm-run-all2": "6.2.6",
 		"patch-package": "8.0.1",
 		"prettier": "3.6.2",
